@@ -1,0 +1,57 @@
+<div *ngIf="this.warenkorb" class="container">
+    <div *ngIf="this.warenkorb.warenkorbpostenlist.length > 0" class="row">
+        <h3>Warenkorb ({{this.warenkorb.warenkorbpostenlist.length}} Artikel)</h3>
+        <div class="col-8">
+            <div *ngFor="let warenkorbposten of this.warenkorb.warenkorbpostenlist" class="warenkorbartikel card">
+                <img src="https://via.placeholder.com/200x200" alt="Card image cap">
+                <div class="card-body">
+                    <a class="result" href="/artikel/id/{{warenkorbposten.warenkorbartikel.artikelIdReference}}">
+                        <h4 class="card-title">{{ warenkorbposten.warenkorbartikel.name }}</h4>
+                    </a>
+                    <p class="card-text">{{ warenkorbposten.warenkorbartikel.warenkorbartikelzustand }}</p>
+                    <p class="card-text text-primary price">{{ warenkorbposten.warenkorbartikel.preis }}</p>
+                    <button *ngIf="warenkorbposten.warenkorbartikel.id !== undefined" (click)="this.deleteArtikel(warenkorbposten.warenkorbartikel.id)" class="btn btn-danger">Vom Warenkorb entfernen</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+          <div class="card">
+            <div class="container p-2">
+                <!--LINE-->
+                <div class="row">
+                    <div class="col card-text">Artikel ({{this.warenkorb.warenkorbpostenlist.length}})</div>
+                    <div class="col card-text d-flex justify-content-end">{{ this.warenkorb.artikelSumme }} €</div>
+                </div>
+                <!--LINE-->
+                
+                <!--LINE-->
+                <div class="row">
+                    <div class="col card-text">Versandkosten</div>
+                    <div class="col card-text d-flex justify-content-end">{{ this.warenkorb.versandSumme }} €</div>
+                </div>
+                <!--LINE-->
+                
+                <!--LINE-->
+                <div class="row line-top">
+                    <div class="col card-text">Gesamt</div>
+                    <div class="col card-text d-flex justify-content-end">{{ this.warenkorb.gesamtSumme }} €</div>
+                </div>
+                <!--LINE-->
+
+                <div class="row">
+                    <div class="col d-flex justify-content-end">
+                        <button (click)="this.gotoBestellung()" class="btn btn-primary">Zur Kasse</button>
+                    </div>
+                </div>
+            </div>
+            
+            
+          </div>
+        </div>
+    </div>
+
+    <div *ngIf="this.warenkorb.warenkorbpostenlist.length == 0" class="warenkorb-leer">
+        <h3>Warenkorb ist leer!</h3>
+    </div>
+
+</div>

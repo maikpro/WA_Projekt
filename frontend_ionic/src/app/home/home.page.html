@@ -1,0 +1,55 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-searchbar [formControl]="searchField" debounce="500"></ion-searchbar>
+
+    <ion-item slot="end">
+      <a href="/warenkorb">
+        <ion-icon name="cart"></ion-icon> 
+        <ion-badge *ngIf="this.warenkorbService.warenkorbArtikelAnzahl > 0" color="danger">{{ this.warenkorbService.warenkorbArtikelAnzahl }}</ion-badge>
+      </a>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-list *ngIf="isSearching">
+    <div *ngFor="let result of results">
+      <a href="/tabs/search/artikel/id/{{result.id}}">
+        <ion-item>
+          <ion-label>{{ result.name }}</ion-label>
+        </ion-item>
+      </a>
+    </div>
+    
+  </ion-list>
+
+
+  <div *ngFor="let artikel of this.artikelList">
+    <a href="/tabs/search/artikel/id/{{artikel.id}}">
+      <ion-card>
+        <ion-grid>
+          <ion-row class="ion-float-left">
+            <!-- Artikel Image -->
+            <ion-col>
+              <img src="https://via.placeholder.com/150x150" alt="{{ artikel.name }}_img">
+            </ion-col>
+            
+            <!--Artikel Content-->
+            <ion-col>
+              <ion-card-content>
+                <ion-card-title>{{ artikel.name }}</ion-card-title>
+                <ion-card-subtitle>Artikelzustand: {{ artikel.artikelzustand }}</ion-card-subtitle>
+                <ion-card-subtitle>Versandkosten: {{ artikel.versand.kosten }} €</ion-card-subtitle>
+                <ion-card-subtitle>Versand aus: {{ artikel.versand.laenderCode }}</ion-card-subtitle>
+                <ion-card-title>{{ artikel.preis }} €</ion-card-title>
+              </ion-card-content>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </a>
+  </div>
+
+  
+</ion-content>

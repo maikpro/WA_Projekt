@@ -1,0 +1,56 @@
+<div class="container artikel-erstellen-container">
+    <h2>Artikel anlegen</h2>
+    <form class="artikelForm" [formGroup]="artikelForm">
+        <!--Artikelname-->
+        <div class="form-group mt-3">
+            <label for="name">Artikelname</label>
+            <input formControlName="name" [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" type="text" class="form-control" placeholder="Artikelname...">
+        
+            <!--Validierung Artikelname -->
+            <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                <div *ngIf="f['name'].errors['required']">Artikelname ist erforderlich</div>
+            </div>
+        </div>
+
+        <!--Artikelzustand-->
+        <div class="form-group mt-3">
+            <label for="name">Zustand</label>
+            <select formControlName="artikelzustand"  class="form-select" [ngClass]="{ 'is-invalid': submitted && f['artikelzustand'].errors }" aria-label="Default select example">
+                <option *ngFor="let zustand of this.artikelZustaende" [value]="zustand">{{ zustand }}</option>
+            </select>
+
+            <!--Validierung Artikelzustand -->
+            <div *ngIf="submitted && f['artikelzustand'].errors" class="invalid-feedback">
+                <div *ngIf="f['artikelzustand'].errors['required']">Artikelzustand ist erforderlich</div>
+            </div>
+        </div>
+
+        <!--Artikelbeschreibung-->
+        <div class="form-group mt-3">
+            <label for="name">Beschreibung</label>
+            <textarea formControlName="beschreibung" [ngClass]="{ 'is-invalid': submitted && f['beschreibung'].errors }" class="form-control" rows="3" placeholder="Eine Artikelbeschreibung..."></textarea>
+
+            <!--Validierung Artikelbeschreibung -->
+            <div *ngIf="submitted && f['beschreibung'].errors" class="invalid-feedback">
+                <div *ngIf="f['beschreibung'].errors['required']">Artikelbeschreibung ist erforderlich</div>
+            </div>
+        </div>
+
+        <!--Artikelpreis-->
+        <div class="form-group mt-3">
+            <label for="name">Preis</label>
+            <input formControlName="preis" [ngClass]="{ 'is-invalid': submitted && f['preis'].errors }" type="text" class="form-control" placeholder="Preis...">
+        
+            <!--Validierung Artikelpreis required-->
+            <div *ngIf="submitted && f['preis'].errors" class="invalid-feedback">
+                <div *ngIf="f['preis'].errors['required']">Artikelpreis ist erforderlich</div>
+            </div>
+
+            <!--Validierung Artikelpreis ist korrektes decimal?-->
+            <div *ngIf="submitted && f['preis'].errors" class="invalid-feedback">
+                <div *ngIf="f['preis'].errors['pattern']">Artikelpreis muss Format (99.99) haben und max. 6 Stellen vor dem Komma!</div>
+            </div>
+        </div>
+    </form>
+    <button class="btn btn-primary mt-3" (click)="createArtikel()">Artikel Anlegen!</button>
+</div>

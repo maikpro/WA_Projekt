@@ -1,0 +1,16 @@
+<ngb-toast
+      *ngFor="let toast of notifyService.toasts"
+      [class]="toast.classname"
+      [autohide]="true"
+      [delay]="toast.delay || 5000"
+    >
+      <ng-template [ngIf]="isTemplate(toast)" [ngIfElse]="text">
+        <ng-template [ngTemplateOutlet]="toast.textOrTpl"></ng-template>
+      </ng-template>
+
+      <ng-template #text>
+        <fa-icon *ngIf="toast.icon" [icon]="faCheck"></fa-icon> 
+        <fa-icon *ngIf="!toast.icon" [icon]="faCancel"></fa-icon> 
+        {{ toast.textOrTpl }}
+      </ng-template>
+</ngb-toast>
