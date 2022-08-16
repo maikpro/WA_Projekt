@@ -1,0 +1,6 @@
+de\hsos\swa\bestellung\entity\Lieferant.class
+de\hsos\swa\bestellung\entity\LaenderCode.class
+de\hsos\swa\bestellung\gateway\BestellartikelversandDTODB.class
+de\hsos\swa\bestellung\entity\Bestellartikelversand.class
+de\hsos\swa\bestellung\entity\Bestellartikelzustand.class
+de\hsos\swa\bestellung\gateway\BestellartikelversandDTODB$Converter.class

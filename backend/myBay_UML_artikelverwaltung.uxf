@@ -1,0 +1,230 @@
+<diagram program="umletino" version="15.0.0"><zoom_level>6</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLPackage</id><coordinates><x>48</x><y>0</y><w>876</w><h>1176</h></coordinates><panel_attributes>artikelverwaltung
+--
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>54</x><y>18</y><w>852</w><h>378</h></coordinates><panel_attributes>boundary
+--
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>60</x><y>36</y><w>834</w><h>354</h></coordinates><panel_attributes>rest
+--
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>66</x><y>54</y><w>492</w><h>330</h></coordinates><panel_attributes>artikel
+--
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>378</x><y>186</y><w>162</w><h>84</h></coordinates><panel_attributes>VersandDTO
+--
++id:Long
++kosten:BigDecimal
++lieferant:Lieferant
++laenderCode:LaenderCode
+--
++VersandDTO()
++VersandDTO(id:Long, kosten:BigDecimal, 
+lieferant:Lieferant, laenderCode:LaenderCode)
+
+bg=blue
+group=group-0</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>72</x><y>186</y><w>276</w><h>192</h></coordinates><panel_attributes>ArtikelDTO
+--
++id:Long
++name:String
++beschreibung:String
++preis:BigDecimal 
++artikelzustand:Artikelzustand 
++versandDTO:VersandDTO 
++erstellt:LocalDateTime 
++geaendert:LocalDateTime 
++aufrufe:Integer
++beobachter:Integer 
++transaktionAm:LocalDateTime 
++username:String 
++artikelstatus:Artikelstatus 
+--
++ArtikelDTO()
++ArtikelDTO(id:Long, name:String, beschreibung:String, preis:BigDecimal, 
+artikelzustand:Artikelzustand, versandDTO:VersandDTO, erstellt:LocalDateTime, 
+geaendert:LocalDateTime, aufrufe:Integer, beobachter:Integer, 
+transaktionAm:LocalDateTime, username:String, artikelstatus:Artikelstatus)
+
+
+bg=blue
+group=group-0</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>342</x><y>210</y><w>48</w><h>18</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+group=group-0</panel_attributes><additional_attributes>10;10;60;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>72</x><y>84</y><w>294</w><h>90</h></coordinates><panel_attributes>ArtikelResource /artikel
+--
++@GET @Path("/id/{artikelid}") getArtikelById(id:Long):Response
++@GET getLatestArtikel():Response
++@GET @Authenticated @Path("/verkauft") getVerkaufteArtikel():Response
++@POST @Authenticated @Path("/anlegen") createArtikel(artikelDTO:ArtikelDTO)
++@PUT @Path("/warenkorb/id/{id}") 
+artikelInDenWarenkorbLegen(warenkorbId:Long, artikelDTO: ArtikelDTO):Response
++@PUT @Authenticated @Path("/account/beobachtungsliste")
+artikelInBeobachtungslisteHinzufuegen(artikelDTO:ArtikelDTO):Response
+
+
+bg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>576</x><y>54</y><w>306</w><h>120</h></coordinates><panel_attributes>artikel
+--
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>582</x><y>78</y><w>294</w><h>72</h></coordinates><panel_attributes>SuchenResource /artikel
+--
+@Inject
+    SuchenService suchenService;
+
+--
+@GET @Path("/all") getAll():Response
+@GET @Path("/suche") suchen(@QueryParam("sw") suchwort: String):Response
+
+bg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>54</x><y>408</y><w>708</w><h>228</h></coordinates><panel_attributes>control
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>66</x><y>438</y><w>204</w><h>72</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+ArtikelService
+--
++getById(Long id):Optional&lt;Artikel&gt; 
++createArtikel(Artikel artikel):Optional&lt;Artikel&gt; 
++getLatestArtikel():Collection&lt;Artikel&gt; 
++getVerkaufteArtikel(String username):Collection&lt;Artikel&gt; 
++updateArtikel(Artikel artikel):Optional&lt;Artikel&gt; 
+
+
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>30</x><y>162</y><w>54</w><h>330</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;injects&gt;&gt;</panel_attributes><additional_attributes>60;530;10;530;10;10;70;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>66</x><y>516</y><w>204</w><h>60</h></coordinates><panel_attributes>ArtikelAktualisierungService
+--
+implementiert IArtikelBeobachterAktualisierung 
+aus accountverwaltung.control.acl
+und
+IArtikelVerkauft aus bestellung.control.acl
+
+
+
+
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>282</x><y>438</y><w>204</w><h>48</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+SuchenService
+--
++getAll():Collection&lt;Artikel&gt; 
++getAllByLikeSearch(suchwort:String):Collection&lt;Artikel&gt; 
+
+
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>480</x><y>144</y><w>216</w><h>330</h></coordinates><panel_attributes>lt=&lt;.
+m2=&lt;&lt;injects&gt;&gt;</panel_attributes><additional_attributes>10;530;290;530;290;10</additional_attributes></element><element><id>UMLPackage</id><coordinates><x>282</x><y>492</y><w>372</w><h>120</h></coordinates><panel_attributes>acl
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>294</x><y>516</y><w>228</w><h>36</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+IBeobachtungslisteService
+--
++artikelHinzufuegen(artikelDTO:ArtikelDTO):Optional&lt;ArtikelDTO&gt;
+
+
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>294</x><y>564</y><w>312</w><h>36</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+IWarenkorbZurSuche
+--
++artikelHinzufuegen(warenkorbId:Long, artikelDTO:ArtikelDTO):Optional&lt;WarenkorbDTO&gt;
+
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>360</x><y>150</y><w>282</w><h>402</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;injects&gt;&gt;</panel_attributes><additional_attributes>270;650;400;650;400;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>384</x><y>672</y><w>204</w><h>78</h></coordinates><panel_attributes>Versand
+--
+-id:Long
+-kosten:BigDecimal
+--
++Versand(id:Long, kosten:BigDecimal, 
+lieferant:Lieferant, laenderCode:LaenderCode)
+
+
+
+
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>480</x><y>774</y><w>72</w><h>36</h></coordinates><panel_attributes>&lt;&lt;Enum&gt;&gt;
+Lieferant
+--
+DHL, HERMES, DPD
+
+
+
+
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>390</x><y>774</y><w>72</w><h>36</h></coordinates><panel_attributes>&lt;&lt;Enum&gt;&gt;
+LaenderCode
+--
+DEU, CHE, AUT
+
+
+
+
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>420</x><y>744</y><w>48</w><h>42</h></coordinates><panel_attributes>lt=&lt;-
+-lieferant</panel_attributes><additional_attributes>10;50;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>504</x><y>744</y><w>60</w><h>42</h></coordinates><panel_attributes>lt=&lt;-
+-laenderCode</panel_attributes><additional_attributes>10;50;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>84</x><y>870</y><w>72</w><h>36</h></coordinates><panel_attributes>&lt;&lt;Enum&gt;&gt;
+Artikelzustand
+--
+NEU, GEBRAUCHT
+
+
+
+
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>222</x><y>870</y><w>78</w><h>36</h></coordinates><panel_attributes>&lt;&lt;Enum&gt;&gt;
+Artikelstatus
+--
+ACTIVE, DEACTIVATED
+
+
+
+
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>54</x><y>648</y><w>558</w><h>270</h></coordinates><panel_attributes>entity
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>66</x><y>672</y><w>282</w><h>180</h></coordinates><panel_attributes>Artikel
+--
+-id:Long
+-name:String
+-beschreibung:String
+-preis:BigDecimal 
+-versandDTO:VersandDTO 
+-erstellt:LocalDateTime 
+-geaendert:LocalDateTime 
+-aufrufe:Integer
+-beobachter:Integer 
+-transaktionAm:LocalDateTime 
+-username:String  
+--
++Artikel(id:Long, name:String, beschreibung:String, preis:BigDecimal, 
+artikelzustand:Artikelzustand, versandDTO:VersandDTO, erstellt:LocalDateTime, 
+geaendert:LocalDateTime, aufrufe:Integer, beobachter:Integer, 
+transaktionAm:LocalDateTime, username:String, artikelstatus:Artikelstatus)
+
+
+
+
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>342</x><y>696</y><w>54</w><h>18</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;70;10</additional_attributes></element><element><id>Relation</id><coordinates><x>114</x><y>846</y><w>66</w><h>36</h></coordinates><panel_attributes>lt=&lt;-
+-artikelzustand</panel_attributes><additional_attributes>10;40;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>252</x><y>846</y><w>60</w><h>36</h></coordinates><panel_attributes>lt=&lt;-
+-artikelstatus</panel_attributes><additional_attributes>10;40;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>162</x><y>948</y><w>276</w><h>192</h></coordinates><panel_attributes>ArtikelDTODB
+--
++id:Long
++name:String
++beschreibung:String
++preis:BigDecimal 
++artikelzustand:Artikelzustand 
++versandDTODB:VersandDTODB
++erstellt:LocalDateTime 
++geaendert:LocalDateTime 
++aufrufe:Integer
++beobachter:Integer 
++transaktionAm:LocalDateTime 
++username:String 
++artikelstatus:Artikelstatus 
+--
++ArtikelDTODB()
++ArtikelDTODB(id:Long, name:String, beschreibung:String, preis:BigDecimal, 
+artikelzustand:Artikelzustand, versandDTO:VersandDTO, erstellt:LocalDateTime, 
+geaendert:LocalDateTime, aufrufe:Integer, beobachter:Integer, 
+transaktionAm:LocalDateTime, username:String, artikelstatus:Artikelstatus)
+
+
+bg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>54</x><y>930</y><w>588</w><h>234</h></coordinates><panel_attributes>entity
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>462</x><y>948</y><w>162</w><h>84</h></coordinates><panel_attributes>VersandDTODB
+--
++id:Long
++kosten:BigDecimal
++lieferant:Lieferant
++laenderCode:LaenderCode
+--
++VersandDTODB()
++VersandDTODB(id:Long, kosten:BigDecimal, 
+lieferant:Lieferant, laenderCode:LaenderCode)
+
+bg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>432</x><y>960</y><w>42</w><h>18</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;50;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>66</x><y>960</y><w>84</w><h>24</h></coordinates><panel_attributes>ArtikelRepository
+--
+
+
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>30</x><y>492</y><w>48</w><h>498</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>60;10;10;10;10;810;60;810</additional_attributes></element><element><id>Relation</id><coordinates><x>114</x><y>462</y><w>534</w><h>504</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>620;10;870;10;870;770;10;770;10;820</additional_attributes></element></diagram>

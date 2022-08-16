@@ -1,0 +1,326 @@
+<diagram program="umletino" version="15.0.0"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>0</x><y>0</y><w>250</w><h>30</h></coordinates><panel_attributes>myBay Onlineshop von Fabrewitz, Proba</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>0</x><y>40</y><w>1260</w><h>2740</h></coordinates><panel_attributes>bestellung
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>20</x><y>70</y><w>1180</w><h>730</h></coordinates><panel_attributes>boundary
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>40</x><y>130</y><w>510</w><h>110</h></coordinates><panel_attributes>BestellungResource /bestellung
+bg=red
+--
++@GET @Path("/id/{bestellungId}") bestellungAnzeigen(bestellungId:Long):Response
++@GET @Authenticated @Path("/account/kaeufe") bestellungByUsername():Response
++@POST @Authenticated bestellungAnlegen(bestellungDTO:BestellungDTO):Response
++@DELETE @Authenticated  @Path("/id/{bestellungId}")
+bestellungLoeschen(id:Long):Response</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>80</x><y>260</y><w>500</w><h>210</h></coordinates><panel_attributes>BestellungDTO
+bg=blue
+--
++id:Long
++gesamtSumme:BigDecimal
++bezahlmethode:Bezahlmethode
++bestellstatus:Bestellstatus
++bestellpostenDTO:List&lt;BestellpostenDTO&gt;
++kaeufer:BestellacountDTO
++verkaeufer:List&lt;BestellaccountDTO&gt;
+--
++BestellungDTO()
++BestellungDTO(id:Long, gesamtSumme:BigDecimal, bezahlmethode:Bezahlmethode, 
+bestellstatus:Bestellstatus, bestellpostenDTO:List&lt;BestellpostenDTO&gt;, 
+kaeufer:BestellacountDTO, verkaeufer:List&lt;BestellaccountDTO&gt;)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>80</x><y>640</y><w>330</w><h>130</h></coordinates><panel_attributes>BestellpostenDTO
+bg=blue
+--
++postenNr:Long
++menge:Integer
++bestellartikelDTO:BestellartikelDTO
+--
++BestellpostenDTO()
++BestellpostenDTO(postenNr:Long, menge:Integer, 
+bestellartikelDTO:BestellartikelDTO)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>60</x><y>230</y><w>80</w><h>630</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;injects&gt;&gt;</panel_attributes><additional_attributes>10;610;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>180</x><y>460</y><w>30</w><h>200</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes>10;10;10;180</additional_attributes></element><element><id>Relation</id><coordinates><x>290</x><y>550</y><w>170</w><h>110</h></coordinates><panel_attributes>lt=&lt;-
++bestellartikelDTO</panel_attributes><additional_attributes>150;20;30;20;30;90</additional_attributes></element><element><id>UMLClass</id><coordinates><x>440</x><y>540</y><w>370</w><h>210</h></coordinates><panel_attributes>BestellartikelDTO
+bg=blue
+--
++id:Long
++name:String
++preis:BigDecimal
++bestellartikelzustand:Bestellartikelzustand
++versand:BestellartikelversandDTO
++username:String
++artikelIdReference:Long
+--
++BestellartikelDTO()
++BestellartikelDTO(id:Long, name:String, preis:BigDecimal,
+bestellartikelzustand:Bestellartikelzustand, 
+versand:BestellartikelversandDTO, username:String, 
+artikelIdReference:Long)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>920</x><y>580</y><w>240</w><h>160</h></coordinates><panel_attributes>BestellartikelversandDTO
+bg=blue
+--
++id:Long
++kosten:BigDecimal
++lieferant:Lieferant
++laenderCode:LaenderCode
+--
++BestellartikelversandDTO()
++BestellartikelversandDTO(id:Long, 
+kosten:BigDecimal, lieferant:Lieferant,
+laenderCode:LaenderCode)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>800</x><y>660</y><w>140</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes>10;20;120;20</additional_attributes></element><element><id>UMLPackage</id><coordinates><x>20</x><y>810</y><w>1190</w><h>440</h></coordinates><panel_attributes>control
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>40</x><y>840</y><w>610</w><h>150</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+BestellungService
+bg=green
+--
++bestellungAnzeigen(id:Long):Optional&lt;Bestellung&gt;
++kaeufeAnzeigen(bestellaccounts:Collection&lt;Bestellaccount&gt;):Collection&lt;Bestellaccount&gt;
++bestellungAnlegen(bestellung:Bestellung):Optional&lt;Bestellung&gt;
++bestellungLoeschen(id:Long):boolean
++bezahlmethodeFestlegen(id:Long, +bezahlmethode:Bezahlmethode):boolean
++bestellstatusAendern(id:Long, bestellstatus:Bestellstatus)
++bestellungAbschliessen(id:Long):Optional&lt;Bestellung&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>40</x><y>1020</y><w>540</w><h>80</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+BestellartikelService
+bg=green
+--
++createBestellartikel(bestellartikel:Bestellartikel):Optional&lt;Bestellartikel&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>0</x><y>920</y><w>60</w><h>1180</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>40;10;10;10;10;1160;30;1160</additional_attributes></element><element><id>Relation</id><coordinates><x>610</x><y>980</y><w>80</w><h>200</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;injects&gt;&gt;</panel_attributes><additional_attributes>10;10;10;180</additional_attributes></element><element><id>Relation</id><coordinates><x>570</x><y>1080</y><w>670</w><h>1010</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;650;10;650;990;620;990</additional_attributes></element><element><id>Relation</id><coordinates><x>450</x><y>1090</y><w>80</w><h>90</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;injects&gt;&gt;</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>820</x><y>880</y><w>360</w><h>70</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+IArtikelVerkauft
+bg=green
+--
++artikelstatusUpdate(artikelId:Long)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>800</x><y>840</y><w>390</w><h>130</h></coordinates><panel_attributes>acl
+--
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>290</x><y>1160</y><w>370</w><h>60</h></coordinates><panel_attributes>BestellungZumWarenkorb
+bg=yellow
+--
++warenkorbZurKasse(warenkorbDTO:WarenkorbDTO):boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>20</x><y>1260</y><w>1190</w><h>730</h></coordinates><panel_attributes>entity
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>910</x><y>1300</y><w>290</w><h>130</h></coordinates><panel_attributes>Bestellposten
+bg=yellow
+--
+-postenNr:Long
+-menge:Integer
+-bestellartikel:Bestellartikel
+--
++Bestellposten(postenNr:Long, menge:Integer, 
+bestellartikel:Bestellartikel)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>610</x><y>1310</y><w>320</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;300;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1080</x><y>1420</y><w>100</w><h>180</h></coordinates><panel_attributes>lt=&lt;-
+-bestellartikel</panel_attributes><additional_attributes>10;160;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>860</x><y>1580</y><w>340</w><h>260</h></coordinates><panel_attributes>Bestellartikel
+bg=yellow
+--
+-id:Long
+-name:String
+-preis:BigDecimal
+-bestellartikelzustand:Bestellartikelzustand
+-versand:Bestellartikelversand
+-username:String
+-artikelIdReference:Long
+--
++Bestellartikel(id:Long, name:String, preis:BigDecimal,
+bestellartikelzustand:Bestellartikelzustand, 
+versand:Bestellartikelversand, username:String, 
+artikelIdReference:Long)
++Bestellartikel(name:String, preis:BigDecimal,
+bestellartikelzustand:Bestellartikelzustand, 
+versand:Bestellartikelversand, username:String, 
+artikelIdReference:Long)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>670</x><y>1830</y><w>290</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>270;10;270;90;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>1040</x><y>1830</y><w>140</w><h>100</h></coordinates><panel_attributes>lt=&lt;-
+-bestellartikelzustand</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>970</x><y>1910</y><w>170</w><h>60</h></coordinates><panel_attributes>&lt;&lt;Enum&gt;&gt;
+Bestellartikelzustand
+bg=yellow
+--
+NEU, GEBRAUCHT</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>270</x><y>1830</y><w>410</w><h>130</h></coordinates><panel_attributes>Bestellartikelversand
+bg=yellow
+--
+-id:Long
+-kosten:BigDecimal
+-lieferant:Lieferant
+-laenderCode:LaenderCode
+--
++Bestellartikelversand(id:Long, kosten:BigDecimal, lieferant:Lieferant,
+laenderCode:LaenderCode)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>160</x><y>1840</y><w>130</w><h>40</h></coordinates><panel_attributes>lt=&lt;-
+-lieferant</panel_attributes><additional_attributes>110;20;10;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>40</x><y>1810</y><w>130</w><h>70</h></coordinates><panel_attributes>&lt;&lt;Enum&gt;&gt;
+Lieferant
+bg=yellow
+--
+DHL, HERMES, DPD
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>50</x><y>1890</y><w>120</w><h>60</h></coordinates><panel_attributes>&lt;&lt;Enum&gt;&gt;
+LaenderCode
+bg=yellow
+--
+DEU, CHE, AUT</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>160</x><y>1900</y><w>130</w><h>40</h></coordinates><panel_attributes>lt=&lt;-
+-laenderCode</panel_attributes><additional_attributes>110;20;10;20</additional_attributes></element><element><id>UMLPackage</id><coordinates><x>20</x><y>2000</y><w>1190</w><h>760</h></coordinates><panel_attributes>gateway
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>30</x><y>2030</y><w>610</w><h>130</h></coordinates><panel_attributes>BestellungRepository
+bg=yellow
+--
++warenkorbAnzeigen(id:Long):Optional&lt;Warenkorb&gt;
++warenkorbAnlegen():Optional&lt;Warenkorb&gt;
++warenkorbArtikelEntfernen(warenkorbId:Long, artikelId:Long):Optional&lt;Warenkorb&gt;
++warenkorbLoeschen(id:Long):boolean
++artikelInWarenkorbLegen(warenkorbId:Long, warenkorbartikel:Warenkorbartikel ):Optional&lt;Warenkorb&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>670</x><y>2050</y><w>520</w><h>60</h></coordinates><panel_attributes>BestellartikelRepository
+bg=yellow
+--
++createBestellartikel(bestellartikel:Bestellartikel):Optional&lt;Bestellartikel&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>960</x><y>2580</y><w>230</w><h>170</h></coordinates><panel_attributes>BestellartikelversandDTODB
+bg=blue
+--
++id:Long
++kosten:BigDecimal
++lieferant:Lieferant
++laenderCode:LaenderCode
+--
++BestellartikelversandDTODB()
++BestellartikelversandDTODB(id:Long, 
+kosten:BigDecimal, lieferant:Lieferant, 
+laenderCode:LaenderCode)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>500</x><y>2540</y><w>370</w><h>210</h></coordinates><panel_attributes>BestellartikelDTODB
+bg=blue
+--
++id:Long
++name:String
++preis:BigDecimal
++bestellartikelzustand:Bestellartikelzustand
++versand:BestellartikelversandDTODB
++username:String
++artikelIdReference:Long
+--
++BestellartikelDTODB()
++BestellartikelDTODB(id:Long, name:String, preis:BigDecimal,
+bestellartikelzustand:Bestellartikelzustand, 
+versand:BestellartikelversandDTODB, username:String, 
+artikelIdReference:Long)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>30</x><y>2620</y><w>320</w><h>130</h></coordinates><panel_attributes>BestellpostenDTODB
+bg=blue
+--
++postenNr:Long
++menge:Integer
++bestellartikelDTODB:BestellartikelDTODB
+--
++BestellpostenDTODB()
++BestellpostenDTODB(postenNr:Long, menge:Integer, 
+bestellartikelDTODB:BestellartikelDTODB)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>340</x><y>2660</y><w>180</w><h>40</h></coordinates><panel_attributes>lt=&lt;-
++bestellartikelDTODB</panel_attributes><additional_attributes>160;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>860</x><y>2650</y><w>120</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes>10;20;100;20</additional_attributes></element><element><id>Relation</id><coordinates><x>80</x><y>2380</y><w>30</w><h>260</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes>10;10;10;240</additional_attributes></element><element><id>UMLPackage</id><coordinates><x>30</x><y>100</y><w>1160</w><h>690</h></coordinates><panel_attributes>rest
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>680</x><y>130</y><w>480</w><h>160</h></coordinates><panel_attributes>BestellaccountDTO
+bg=blue
+--
++id:Long
++vorname:String
++nachname:String
++username:String
++bestellungadresseDTO:BestellungadresseDTO
+--
++BestellartikelversandDTO()
++BestellartikelversandDTO(id:Long, vorname:String, 
+nachname:String, username:String, bestellungadresseDTO:BestellungadresseDTO)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>920</x><y>360</y><w>240</w><h>160</h></coordinates><panel_attributes>BestellungadresseDTO
+bg=blue
+--
++id:Long
++strasse:String
++hausnr:String
++plz:String
++ort:String
+--
++BestellungDTO()
++BestellungDTO(id:Long, strasse:String, 
+hausnr:String, plz:String, ort:String)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>970</x><y>280</y><w>30</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>570</x><y>280</y><w>240</w><h>140</h></coordinates><panel_attributes>lt=&lt;-
++kaeufer
++verkaeufer</panel_attributes><additional_attributes>10;110;220;110;220;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>730</x><y>990</y><w>450</w><h>70</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+BestellaccountService
+bg=green
+--
++getBestellaccountsByUsername(username:String):Collection&lt;Bestellaccount&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>730</x><y>1130</y><w>450</w><h>70</h></coordinates><panel_attributes>EmailService
+bg=yellow
+--
++mailsVersenden(bestellung:Bestellung)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>540</x><y>190</y><w>330</w><h>710</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;injects&gt;&gt;</panel_attributes><additional_attributes>310;690;310;260;90;260;90;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>750</x><y>810</y><w>120</w><h>200</h></coordinates><panel_attributes>lt=&lt;.
+</panel_attributes><additional_attributes>10;180;10;10;100;10</additional_attributes></element><element><id>Relation</id><coordinates><x>680</x><y>810</y><w>100</w><h>370</h></coordinates><panel_attributes>lt=&lt;.
+</panel_attributes><additional_attributes>50;350;10;350;10;10;80;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>40</x><y>1600</y><w>430</w><h>150</h></coordinates><panel_attributes>Bestellaccount
+bg=yellow
+--
+-id:Long
+-vorname:String
+-nachname:String
+-username:String
+-bestellungadresse:Bestellungadresse
+--
++Bestellartikelversand(id:Long, vorname:String, 
+nachname:String, username:String, bestellungadresse:Bestellungadresse)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>730</x><y>1350</y><w>170</w><h>60</h></coordinates><panel_attributes>&lt;&lt;Enum&gt;&gt;
+Bestellstatus
+bg=yellow
+--
+BEZAHLT, ABGESCHLOSSEN</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>30</x><y>1290</y><w>590</w><h>220</h></coordinates><panel_attributes>Bestellung
+bg=yellow
+--
+-id:Long
+-gesamtSumme:BigDecimal
+-bezahlmethode:Bezahlmethode
+-bestellstatus:Bestellstatus
+-bestellposten:List&lt;Bestellposten&gt;
+-kaeufer:Bestellacount
+-verkaeufer:List&lt;Bestellaccount&gt;
+--
++Bestellung()
++Bestellung(gesamtSumme:BigDecimal, bestellstatus:Bestellstatus,  bestellposten:List&lt;Bestellposten&gt;)
++Bestellung(id:Long, gesamtSumme:BigDecimal, bezahlmethode:Bezahlmethode, 
+bestellstatus:Bestellstatus, bestellposten:List&lt;Bestellposten&gt;, 
+kaeufer:Bestellacount, verkaeufer:List&lt;Bestellaccount&gt;)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>580</x><y>1600</y><w>240</w><h>160</h></coordinates><panel_attributes>Bestellungadresse
+bg=yellow
+--
+-id:Long
+-strasse:String
+-hausnr:String
+-plz:String
+-ort:String
+--
++Bestellung(id:Long, strasse:String, 
+hausnr:String, plz:String, ort:String)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>730</x><y>1440</y><w>170</w><h>60</h></coordinates><panel_attributes>&lt;&lt;Enum&gt;&gt;
+Bezahlmethode
+bg=yellow
+--
+PAYPAL, LASTSCHRIFT</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>610</x><y>1370</y><w>140</w><h>40</h></coordinates><panel_attributes>lt=&lt;-
+-bestellstatus</panel_attributes><additional_attributes>10;20;120;20</additional_attributes></element><element><id>Relation</id><coordinates><x>610</x><y>1450</y><w>140</w><h>40</h></coordinates><panel_attributes>lt=&lt;-
+-bezahlmethode</panel_attributes><additional_attributes>10;20;120;20</additional_attributes></element><element><id>Relation</id><coordinates><x>460</x><y>1670</y><w>140</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;120;10</additional_attributes></element><element><id>Relation</id><coordinates><x>230</x><y>1500</y><w>90</w><h>120</h></coordinates><panel_attributes>lt=&lt;-
+-kaeufer
+-verkaeufer</panel_attributes><additional_attributes>10;10;10;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>680</x><y>2200</y><w>510</w><h>160</h></coordinates><panel_attributes>BestellaccountDTODB
+bg=blue
+--
++id:Long
++vorname:String
++nachname:String
++username:String
++bestellungadresseDTODB:BestellungadresseDTODB
+--
++BestellartikelversandDTODB()
++BestellartikelversandDTODB(id:Long, vorname:String, 
+nachname:String, username:String, bestellungadresseDTODB:BestellungadresseDTODB)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>670</x><y>2120</y><w>520</w><h>60</h></coordinates><panel_attributes>BestellaccountlRepository
+bg=yellow
+--
++getBestellaccountsByUsername(username:String):Collection&lt;Bestellaccount&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1170</x><y>1010</y><w>90</w><h>1160</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;70;10;70;1140;20;1140</additional_attributes></element><element><id>UMLClass</id><coordinates><x>940</x><y>2400</y><w>240</w><h>160</h></coordinates><panel_attributes>BestellungadresseDTODB
+bg=blue
+--
++id:Long
++strasse:String
++hausnr:String
++plz:String
++ort:String
+--
++BestellungDTODB()
++BestellungDTODB(id:Long, strasse:String, 
+hausnr:String, plz:String, ort:String)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>30</x><y>2190</y><w>510</w><h>200</h></coordinates><panel_attributes>BestellungDTODB
+bg=blue
+--
++id:Long
++gesamtSumme:BigDecimal
++bezahlmethode:Bezahlmethode
++bestellstatus:Bestellstatus
++bestellpostenDTODB:List&lt;BestellpostenDTODB&gt;
++kaeufer:BestellacountDTODB
++verkaeufer:List&lt;BestellaccountDTODB&gt;
+--
++BestellungDTODB()
++BestellungDTODB(id:Long, gesamtSumme:BigDecimal, bezahlmethode:Bezahlmethode, 
+bestellstatus:Bestellstatus, bestellpostenDTODB:List&lt;BestellpostenDTODB&gt;, 
+kaeufer:BestellacountDTODB, verkaeufer:List&lt;BestellaccountDTODB&gt;)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1040</x><y>2350</y><w>30</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>530</x><y>2280</y><w>170</w><h>50</h></coordinates><panel_attributes>lt=&lt;-
++kaeufer
++verkaeufer</panel_attributes><additional_attributes>10;20;150;20</additional_attributes></element></diagram>

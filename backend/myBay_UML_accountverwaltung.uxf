@@ -1,0 +1,278 @@
+<diagram program="umletino" version="15.0.0"><zoom_level>3</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>141</x><y>144</y><w>75</w><h>9</h></coordinates><panel_attributes>myBay Onlineshop von Fabrewitz, Proba</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>141</x><y>132</y><w>444</w><h>723</h></coordinates><panel_attributes>accountverwaltung
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>147</x><y>168</y><w>432</w><h>267</h></coordinates><panel_attributes>boundary
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>360</x><y>189</y><w>204</w><h>147</h></coordinates><panel_attributes>client
+--
+
+group=group-5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>363</x><y>198</y><w>192</w><h>51</h></coordinates><panel_attributes>KeycloakAccountDTO
+--
++id:String 
++firstName:String
++lastName:String
++email:String
++username:String
++enabled:boolean
++credentialDTOs:CredentialDTO[0..n]
+--
++KeycloakAccountDTO()
++KeycloakAccountDTO(firstName:String, lastName:String, email:String, username:String, credentialDTOs:[0..n]) 
+
+bg=blue
+
+group=group-5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>363</x><y>255</y><w>123</w><h>36</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+KeycloakGatewayMP
+--
++getAllAccounts:KeycloakAccountDTO[0..n]
++createAccount(keycloakAccountDTO: KeycloakAccountDTO):Response
++getAccountByUsername(username: String):KeycloakAccountDTO[0..n]
++deleteAccount(id:String ):Response
+
+bg=green
+
+group=group-5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>363</x><y>297</y><w>198</w><h>36</h></coordinates><panel_attributes>RequestAuthorizationHeader
+--
+currentTokens:Tokens
+oidcClient:OidcClient
+--
+init():void
+update(incomingHeaders:MultivaluedMap&lt;String, String&gt;, clientOutgoingHeaders: MultivaluedMap&lt;String, String&gt;)
+bg=yellow
+
+group=group-5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>153</x><y>279</y><w>168</w><h>48</h></coordinates><panel_attributes>AccountDTO
+--
++id:Long
++vorname:String
++nachname:String
++email:String
++username:String;
+--
++AccountDTO()
++public AccountDTO(id:Long, vorname:String, nachname:String, email:String, username:String, 
+adresseDTO:AdresseDTO, credentialDTOs:CredentialDTO[0..n])
+
+bg=blue
+
+group=group-11</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>168</x><y>342</y><w>126</w><h>42</h></coordinates><panel_attributes>AdresseDTO
+--
++id:Long
++strasse:String
++hausnr:String
++plz:String
++ort:String
+--
++AdresseDTO()
++AdresseDTO(id:Long, strasse:String, hausnr:String, plz:String, ort:String)
+
+
+bg=blue
+group=group-11</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>213</x><y>324</y><w>30</w><h>24</h></coordinates><panel_attributes>lt=&lt;-
++adresseDTO
+group=group-11</panel_attributes><additional_attributes>10;60;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>300</x><y>342</y><w>114</w><h>45</h></coordinates><panel_attributes>BeobachtungsartikelDTO
+--
++id:Long
++name:String
++preis:BigDecimal
++artikelIdReference:Long
+--
++BeobachtungsartikelDTO()
++BeobachtungsartikelDTO(id:Long, name:String, preis:BigDecimal, 
+artikelzustand:Artikelzustand, artikelIdReference:Long)
+
+
+bg=blue
+group=group-11</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>312</x><y>324</y><w>42</w><h>24</h></coordinates><panel_attributes>lt=&lt;-
++beobachtungsliste
+group=group-11</panel_attributes><additional_attributes>10;60;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>153</x><y>390</y><w>126</w><h>33</h></coordinates><panel_attributes>CredentialDTO
+--
++type:String
++value:String
++temporary:boolean
+--
++CredentialDTO()
++CredentialDTO(type:String, value:String, temporary:boolean) 
+
+
+
+bg=blue
+group=group-11</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>156</x><y>324</y><w>39</w><h>72</h></coordinates><panel_attributes>lt=&lt;-
+m2=+credentialDTOs*
+group=group-11</panel_attributes><additional_attributes>10;220;10;10</additional_attributes></element><element><id>UMLPackage</id><coordinates><x>150</x><y>180</y><w>423</w><h>249</h></coordinates><panel_attributes>rest
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>153</x><y>189</y><w>192</w><h>78</h></coordinates><panel_attributes>AccountResource /accounts
+--
+@Inject
+IArtikelBeobachterAktualisierung artikelAktualisierung;
+--
++@GET getAllAccounts():Response
++@GET @Authenticated @Path("/currentLogged") getKeycloakAccountByUsername(): Response
++@GET @Authenticated @Path("/currentAccountInfo") getCurrentAccountByUsername():Response
++@GET @Authenticated @Path("/username/{username}") getAccountByUsername(username: String):Response
++@POST @Authenticated createAccountInfo(accountDTO: AccountDTO):Response
++@PUT @Authenticated updateAccountInfo(accountDTO: AccountDTO):Response
++@DELETE @Authenticated deleteAccount():Response
++@DELETE @Authenticated @Path("/beobachtungsliste/beobachtungsartikel/id/{id}") 
+deleteBeobachtungsartikel(id: Long):Response
+
+bg=red
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>342</x><y>258</y><w>27</w><h>12</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;injects&gt;&gt;</panel_attributes><additional_attributes>70;20;10;20</additional_attributes></element><element><id>UMLPackage</id><coordinates><x>147</x><y>447</y><w>324</w><h>114</h></coordinates><panel_attributes>control
+--
+
+group=group-10</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>153</x><y>459</y><w>201</w><h>45</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+AccountService
+--
++getAccountByUsername(username:String):Optional&lt;Account&gt; 
++createAccount(account:Account):Optional&lt;Account&gt; 
++updateAccount(account:Account):Optional&lt;Account&gt; 
++deleteAccount(username:String):boolean
++artikelZurBeobachtungsliste(currentUsername:String, beobachtungsartikel:Beobachtungsartikel):Optional&lt;Account&gt; 
++deleteBeobachtungsartikel(id:Long, username:String):Optional&lt;Account&gt; 
++getReferenceArtikelIdFromBeobachtungsartikel(beobachtungsartikelId:Long, username:String):Optional&lt;Long&gt; 
+
+
+bg=green
+
+
+group=group-10</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>126</x><y>234</y><w>33</w><h>249</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;injects&gt;&gt;</panel_attributes><additional_attributes>90;810;10;810;10;10;90;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>153</x><y>513</y><w>51</w><h>12</h></coordinates><panel_attributes>BeobachtungslisteService
+--
+
+
+bg=yellow
+
+
+group=group-10</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>126</x><y>234</y><w>36</w><h>291</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>90;950;10;950;10;10;100;10</additional_attributes></element><element><id>UMLNote</id><coordinates><x>213</x><y>513</y><w>75</w><h>21</h></coordinates><panel_attributes>bg=orange
+
+implementiert IBeobachtungslisteService
+aus artikelverwaltung.control.acl
+group=group-10</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>201</x><y>510</y><w>18</w><h>9</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>40;10;10;10</additional_attributes></element><element><id>UMLPackage</id><coordinates><x>363</x><y>459</y><w>99</w><h>60</h></coordinates><panel_attributes>acl
+--
+
+group=group-10</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>366</x><y>468</y><w>87</w><h>45</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+IArtikelBeobachterAktualisierung
+--
+beobachterAnzahlReduzieren(artikelId:Long):void
+
+
+bg=green
+
+
+group=group-10</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>147</x><y>567</y><w>258</w><h>135</h></coordinates><panel_attributes>entity
+--
+
+group=group-8</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>330</x><y>582</y><w>66</w><h>45</h></coordinates><panel_attributes>Adresse
+--
+-id:Long
+-strasse:String
+-hausnr:String
+-plz:String
+-ort:String
+--
++Adresse(id:Long, strasse:String, 
+hausnr:String, plz:String, ort:String)
+
+
+bg=yellow
+
+
+group=group-8</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>306</x><y>645</y><w>66</w><h>18</h></coordinates><panel_attributes>&lt;&lt;Enum&gt;&gt;
+Artikelzustand
+--
+NEU, GEBRAUCHT
+
+
+bg=yellow
+
+
+group=group-8</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>162</x><y>639</y><w>108</w><h>45</h></coordinates><panel_attributes>Beobachtungsartikel
+--
+-id:Long
+-name:String 
+-preis:BigDecimal
+-artikelIdReference:Long 
+--
++Beobachtungsartikel(id:Long, name:String , preis:BigDecimal,
+artikelzustand:Artikelzustand , artikelIdReference:Long);
+
+
+bg=yellow
+
+
+group=group-8</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>267</x><y>642</y><w>45</w><h>15</h></coordinates><panel_attributes>lt=&lt;-
+m1=-artikelzustand
+group=group-8</panel_attributes><additional_attributes>130;20;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>159</x><y>582</y><w>147</w><h>45</h></coordinates><panel_attributes>Account
+--
+-id:Long
+-vorname:String
+-nachname:String
+-email:String
+-username:String
+--
++Account(id:Long, vorname:String, nachname:String, email:String, username:String, 
+adresse:Adresse;, beobachtungsliste:Beobachtungsartikel[0..n])
+
+
+bg=yellow
+
+
+group=group-8</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>303</x><y>591</y><w>33</w><h>9</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+group=group-8</panel_attributes><additional_attributes>10;10;90;10</additional_attributes></element><element><id>Relation</id><coordinates><x>225</x><y>624</y><w>42</w><h>21</h></coordinates><panel_attributes>lt=&lt;-
+m2=-beobachtungsliste*
+group=group-8</panel_attributes><additional_attributes>10;50;10;10</additional_attributes></element><element><id>UMLPackage</id><coordinates><x>147</x><y>708</y><w>282</w><h>135</h></coordinates><panel_attributes>gateway
+--
+
+group=group-9</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>156</x><y>723</y><w>39</w><h>18</h></coordinates><panel_attributes>AccountRepository
+--
+
+
+
+bg=yellow
+
+
+group=group-9</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>132</x><y>489</y><w>30</w><h>246</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>70;10;10;10;10;800;80;800</additional_attributes></element><element><id>UMLClass</id><coordinates><x>201</x><y>723</y><w>168</w><h>48</h></coordinates><panel_attributes>AccountDTODB
+--
++id:Long
++vorname:String
++nachname:String
++email:String
++username:String;
+--
++AccountDTODB()
++public AccountDTODB(id:Long, vorname:String, nachname:String, email:String, username:String, 
+adresseDTODB:AdresseDTODB)
+
+bg=blue
+
+group=group-9</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>156</x><y>786</y><w>126</w><h>42</h></coordinates><panel_attributes>AdresseDTODB
+--
++id:Long
++strasse:String
++hausnr:String
++plz:String
++ort:String
+--
++AdresseDTODB()
++AdresseDTODB(id:Long, strasse:String, hausnr:String, plz:String, ort:String)
+
+
+bg=blue
+group=group-9</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>300</x><y>786</y><w>126</w><h>48</h></coordinates><panel_attributes>BeobachtungsartikelDTODB
+--
++id:Long
++name:String
++preis:BigDecimal
++artikelIdReference:Long
+--
++BeobachtungsartikelDTODB()
++BeobachtungsartikelDTODB(id:Long, name:String, preis:BigDecimal, artikelzustand:Artikelzustand, artikelIdReference:Long)
+--
+
+
+bg=blue
+group=group-9</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>237</x><y>768</y><w>36</w><h>24</h></coordinates><panel_attributes>lt=&lt;-
++adresseDTODB
+group=group-9</panel_attributes><additional_attributes>10;60;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>312</x><y>768</y><w>57</w><h>24</h></coordinates><panel_attributes>lt=&lt;-
++beobachtungsartikelDTODB
+group=group-9</panel_attributes><additional_attributes>10;60;10;10</additional_attributes></element></diagram>
