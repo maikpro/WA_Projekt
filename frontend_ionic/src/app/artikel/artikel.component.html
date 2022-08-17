@@ -1,17 +1,17 @@
 <ion-header [translucent]="true">
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+            <ion-back-button></ion-back-button>
         </ion-buttons>
         
         <ion-item slot="end">
-            <a href="/warenkorb">
+            <a routerLink="/warenkorb">
                 <ion-icon name="cart"></ion-icon> 
                 <ion-badge *ngIf="this.warenkorbService.warenkorbArtikelAnzahl > 0" color="danger">{{ this.warenkorbService.warenkorbArtikelAnzahl }}</ion-badge>
             </a>
         </ion-item>
     </ion-toolbar>
-  </ion-header>
+</ion-header>
 
 <ion-content [fullscreen]="true">
     <div *ngIf="this.artikel && this.artikel.artikelstatus === 'ACTIVE'">

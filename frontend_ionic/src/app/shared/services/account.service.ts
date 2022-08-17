@@ -8,16 +8,16 @@ import { KeycloakAccount } from '../models/KeycloakAccount';
   providedIn: 'root'
 })
 export class AccountService {
-  private readonly apiUrl = "http://localhost:8080/api/accounts";
+  private readonly apiUrl = 'http://localhost:8080/api/accounts';
 
   constructor(private http: HttpClient) { }
 
   public getCurrentAccount(): Observable<KeycloakAccount> {
-    return this.http.get<KeycloakAccount>(this.apiUrl + "/currentLogged");
+    return this.http.get<KeycloakAccount>(this.apiUrl + '/currentLogged');
   }
 
   public getCurrentAccountInfo(): Observable<Account> {
-    return this.http.get<Account>(this.apiUrl + "/currentAccountInfo");
+    return this.http.get<Account>(this.apiUrl + '/currentAccountInfo');
   }
 
   public getAccountByUsername(username: string): Observable<Account> {

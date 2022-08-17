@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class WarenkorbComponent implements OnInit {
   public warenkorb!: Warenkorb;
 
-  constructor(private router: Router, private warenkorbService: WarenkorbService, private cookieService: CookieService) { }
+  constructor(private router: Router, public warenkorbService: WarenkorbService, private cookieService: CookieService) { }
 
   public ngOnInit(): void {
     //this.warenkorbService.setWarenkorbId();

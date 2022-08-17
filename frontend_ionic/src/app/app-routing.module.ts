@@ -11,6 +11,7 @@ const routes: Routes = [
     path: 'warenkorb',
     component: WarenkorbComponent
   },
+  { path: '**', redirectTo: 'home' }
 ];
 @NgModule({
   imports: [

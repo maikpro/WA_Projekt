@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Kontoübersicht
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item *ngIf="this.isLogged">
+      <ion-label>Willkommen {{ this.username }}!</ion-label> 
+      <ion-button color="danger" (click)="this.logout()">Logout</ion-button>
+    </ion-item>
+    <ion-item *ngIf="!this.isLogged">
+      <ion-button (click)="this.login()">Login</ion-button>
+    </ion-item>
+    
+    <!--Navigation-->
+    <ion-item *ngIf="this.isLogged">
+      <a routerLink="/tabs/account-overview/account">
+        <ion-label>Account</ion-label>
+      </a>
+    </ion-item>
+  </ion-list>
+
+
+</ion-content>

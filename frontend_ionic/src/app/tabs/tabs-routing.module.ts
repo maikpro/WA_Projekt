@@ -16,8 +16,8 @@ const routes: Routes = [
         loadChildren: () => import('../search/search.module').then(m => m.SearchPageModule)
       },
       {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+        path: 'account-overview',
+        loadChildren: () => import('../account-overview/account-overview.module').then(m => m.AccountOverviewPageModule)
       },
       {
         path: '',

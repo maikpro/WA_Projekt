@@ -1,0 +1,140 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title>
+            Account
+        </ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<div class="container">
+    <h2>Account</h2>
+    <div class="adresse-container">
+        <form [formGroup]="accountForm">
+            <!--username-->
+            <div class="form-group d-flex justify-content-between align-items-center">
+                <label for="username">Username</label>
+                
+                <div class="input-field">
+                    <input formControlName="username" [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" type="text" class="form-control" placeholder="Username..." readonly>
+                
+                    <!--Validierung email -->
+                    <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+                        <div *ngIf="f['username'].errors['required']">Username ist erforderlich</div>
+                    </div>
+                </div>
+            </div>
+            <!--email-->
+            <div class="form-group d-flex justify-content-between align-items-center">
+                <label for="email">E-Mail</label>
+                
+                <div class="input-field">
+                    <input formControlName="email" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" type="text" class="form-control" placeholder="E-Mail..." readonly>
+                
+                    <!--Validierung email -->
+                    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                        <div *ngIf="f['email'].errors['required']">E-Mail ist erforderlich</div>
+                    </div>
+                </div>
+            </div>
+            <!--Vorname-->
+            <div class="form-group d-flex justify-content-between align-items-center">
+                <label for="vorname">Vorname</label>
+                
+                <div class="input-field">
+                    <input formControlName="vorname" [ngClass]="{ 'is-invalid': submitted && f['vorname'].errors }" type="text" class="form-control" placeholder="Vorname...">
+                
+                    <!--Validierung Vorname -->
+                    <div *ngIf="submitted && f['vorname'].errors" class="invalid-feedback">
+                        <div *ngIf="f['vorname'].errors['required']">Vorname ist erforderlich</div>
+                    </div>
+                </div>
+            </div>
+            <!--Nachname-->
+            <div class="form-group d-flex justify-content-between align-items-center">
+                <label for="nachname">Nachname</label>
+                
+                <div class="input-field">
+                     <input formControlName="nachname" [ngClass]="{ 'is-invalid': submitted && f['nachname'].errors }" type="text" class="form-control" placeholder="Nachname...">
+
+                    <!--Validierung Nachname -->
+                    <div *ngIf="submitted && f['nachname'].errors" class="invalid-feedback">
+                        <div *ngIf="f['nachname'].errors['required']">Nachname ist erforderlich</div>
+                    </div>
+                </div>
+            </div>
+            <!--Strasse-->
+            <div class="form-group d-flex justify-content-between align-items-center">
+                <label for="strasse">Straße</label>
+
+                <div class="input-field">
+                    <input formControlName="strasse" [ngClass]="{ 'is-invalid': submitted && f['strasse'].errors }" type="text" class="form-control" placeholder="Straße...">
+
+                    <!--Validierung strasse -->
+                    <div *ngIf="submitted && f['strasse'].errors" class="invalid-feedback">
+                        <div *ngIf="f['strasse'].errors['required']">Straße ist erforderlich</div>
+                    </div>
+                </div>
+            </div>
+            <!--Hausnr-->
+            <div class="form-group d-flex justify-content-between align-items-center">
+                <label for="hausnr">Hausnummer</label>
+
+                <div class="input-field">
+                    <input formControlName="hausnr" [ngClass]="{ 'is-invalid': submitted && f['hausnr'].errors }" type="text" class="form-control" placeholder="Hausnummer...">
+
+                    <!--Validierung hausnummer -->
+                    <div *ngIf="submitted && f['hausnr'].errors" class="invalid-feedback">
+                        <div *ngIf="f['hausnr'].errors['required']">Hausnummer ist erforderlich</div>
+                    </div>
+                </div>
+
+            </div>
+            <!--PLZ-->
+            <div class="form-group d-flex justify-content-between align-items-center">
+                <label for="plz">PLZ</label>
+
+                <div class="input-field">
+                    <input formControlName="plz" [ngClass]="{ 'is-invalid': submitted && f['plz'].errors }" type="text" class="form-control" placeholder="PLZ...">
+
+                    <!--Validierung plz -->
+                    <div *ngIf="submitted && f['plz'].errors" class="invalid-feedback">
+                        <div *ngIf="f['plz'].errors['required']">PLZ ist erforderlich</div>
+                    </div>
+                </div>
+
+            </div>
+            <!--Ort-->
+            <div class="form-group d-flex justify-content-between align-items-center">
+                <label for="ort">Ort</label>
+
+                <div class="input-field">
+                    <input formControlName="ort" [ngClass]="{ 'is-invalid': submitted && f['ort'].errors }" type="text" class="form-control" placeholder="Ort...">
+                    
+                    <!--Validierung Ort -->
+                    <div *ngIf="submitted && f['ort'].errors" class="invalid-feedback">
+                        <div *ngIf="f['ort'].errors['required']">Ort ist erforderlich</div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="d-flex justify-content-end">
+            <button *ngIf="!this.isCreated" (click)="this.save()" class="btn btn-primary">Speichern</button>
+            <button *ngIf="this.isCreated" (click)="this.update()" class="btn btn-primary">Aktualisieren</button>
+        </div>
+    </div>
+
+    <div class="delete-account-container">
+        <div class="form-group d-flex justify-content-between align-items-center">
+            <h2>Account löschen</h2>
+            <button (click)="this.delete()" class="btn btn-danger">Account löschen</button>
+        </div>
+        <p *ngIf="this.keycloakAccount">Keycloak Account-ID: {{ this.keycloakAccount.id }}</p>
+
+        <button (click)="this.successMessageTest()" class="btn btn-success">Test SuccessMessage!</button>
+        <button (click)="this.errorMessageTest()" class="btn btn-danger">Test ErrorMessage!</button>
+        <button (click)="this.testKaeufe()" class="btn btn-primary">Test Käufe!</button>
+    </div>
+</div>
