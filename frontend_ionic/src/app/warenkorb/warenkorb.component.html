@@ -1,57 +1,133 @@
-<div *ngIf="this.warenkorb" class="container">
-    <div *ngIf="this.warenkorb.warenkorbpostenlist.length > 0" class="row">
+<ion-content [fullscreen]="true">
+    <ion-grid *ngIf="this.warenkorb">
         <h3>Warenkorb ({{this.warenkorb.warenkorbpostenlist.length}} Artikel)</h3>
-        <div class="col-8">
-            <div *ngFor="let warenkorbposten of this.warenkorb.warenkorbpostenlist" class="warenkorbartikel card">
-                <img src="https://via.placeholder.com/200x200" alt="Card image cap">
-                <div class="card-body">
-                    <a class="result" href="/artikel/id/{{warenkorbposten.warenkorbartikel.artikelIdReference}}">
-                        <h4 class="card-title">{{ warenkorbposten.warenkorbartikel.name }}</h4>
+        
+        <!--Desktop Version-->
+        <ion-row class="ion-hide-lg-down">
+            <ion-col size="9">
+                <div *ngFor="let warenkorbposten of this.warenkorb.warenkorbpostenlist">
+                    <a href="/tabs/search/artikel/id/{{warenkorbposten.warenkorbartikel.artikelIdReference}}">
+                        <ion-card>
+                            <ion-grid>
+                                <ion-row class="ion-float-left">
+                                    <!-- Artikel Image -->
+                                    <ion-col>
+                                        <img src="https://via.placeholder.com/150x150" alt="{{ warenkorbposten.warenkorbartikel.name }}_img">
+                                    </ion-col>
+                                    
+                                    <!--Artikel Content-->
+                                    <ion-col>
+                                        <ion-card-content>
+                                        <ion-card-title>{{ warenkorbposten.warenkorbartikel.name }}</ion-card-title>
+                                        <ion-card-subtitle>Artikelzustand: {{ warenkorbposten.warenkorbartikel.warenkorbartikelzustand }}</ion-card-subtitle>
+                                        <ion-card-subtitle>Versandkosten: {{ warenkorbposten.warenkorbartikel.versand.kosten }} €</ion-card-subtitle>
+                                        <ion-card-subtitle>Versand aus: {{ warenkorbposten.warenkorbartikel.versand.laenderCode }}</ion-card-subtitle>
+                                        <ion-card-title>{{ warenkorbposten.warenkorbartikel.preis }} €</ion-card-title>
+                                        </ion-card-content>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-card>
                     </a>
-                    <p class="card-text">{{ warenkorbposten.warenkorbartikel.warenkorbartikelzustand }}</p>
-                    <p class="card-text text-primary price">{{ warenkorbposten.warenkorbartikel.preis }}</p>
-                    <button *ngIf="warenkorbposten.warenkorbartikel.id !== undefined" (click)="this.deleteArtikel(warenkorbposten.warenkorbartikel.id)" class="btn btn-danger">Vom Warenkorb entfernen</button>
                 </div>
-            </div>
-        </div>
-        <div class="col-4">
-          <div class="card">
-            <div class="container p-2">
-                <!--LINE-->
-                <div class="row">
-                    <div class="col card-text">Artikel ({{this.warenkorb.warenkorbpostenlist.length}})</div>
-                    <div class="col card-text d-flex justify-content-end">{{ this.warenkorb.artikelSumme }} €</div>
-                </div>
-                <!--LINE-->
-                
-                <!--LINE-->
-                <div class="row">
-                    <div class="col card-text">Versandkosten</div>
-                    <div class="col card-text d-flex justify-content-end">{{ this.warenkorb.versandSumme }} €</div>
-                </div>
-                <!--LINE-->
-                
-                <!--LINE-->
-                <div class="row line-top">
-                    <div class="col card-text">Gesamt</div>
-                    <div class="col card-text d-flex justify-content-end">{{ this.warenkorb.gesamtSumme }} €</div>
-                </div>
-                <!--LINE-->
+            </ion-col>
 
-                <div class="row">
-                    <div class="col d-flex justify-content-end">
-                        <button (click)="this.gotoBestellung()" class="btn btn-primary">Zur Kasse</button>
+            <ion-col size="3">
+                <ion-card class="price-calculation">
+                    <!--LINE-->
+                    <ion-row class="ion-justify-content-between">
+                        <p>Artikel ({{this.warenkorb.warenkorbpostenlist.length}})</p>
+                        <p>{{ this.warenkorb.artikelSumme }} €</p>
+                    </ion-row>
+                    <!--LINE-->
+                    
+                    <!--LINE-->
+                    <ion-row class="ion-justify-content-between">
+                        <p>Versandkosten</p>
+                        <p>{{ this.warenkorb.versandSumme }} €</p>
+                    </ion-row>
+                    <!--LINE-->
+                    
+                    <!--LINE-->
+                    <ion-row class="ion-justify-content-between line">
+                        <p>Gesamt</p>
+                        <p>{{ this.warenkorb.gesamtSumme }} €</p>
+                    </ion-row>
+                    <!--LINE-->
+                    <ion-button (click)="this.gotoBestellung()" expand="full" shape="round">Zur Kasse</ion-button>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+
+        <!--Mobile Version-->
+        <div class="ion-hide-lg-up">
+            <ion-row>
+                <ion-col>
+                    <div *ngFor="let warenkorbposten of this.warenkorb.warenkorbpostenlist">
+                        <a href="/tabs/search/artikel/id/{{warenkorbposten.warenkorbartikel.artikelIdReference}}">
+                            <ion-card>
+                                <ion-grid>
+                                    <ion-row class="ion-float-left">
+                                        <!-- Artikel Image -->
+                                        <ion-col>
+                                            <img src="https://via.placeholder.com/150x150" alt="{{ warenkorbposten.warenkorbartikel.name }}_img">
+                                        </ion-col>
+                                        
+                                        <!--Artikel Content-->
+                                        <ion-col>
+                                            <ion-card-content>
+                                            <ion-card-title>{{ warenkorbposten.warenkorbartikel.name }}</ion-card-title>
+                                            <ion-card-subtitle>Artikelzustand: {{ warenkorbposten.warenkorbartikel.warenkorbartikelzustand }}</ion-card-subtitle>
+                                            <ion-card-subtitle>Versandkosten: {{ warenkorbposten.warenkorbartikel.versand.kosten }} €</ion-card-subtitle>
+                                            <ion-card-subtitle>Versand aus: {{ warenkorbposten.warenkorbartikel.versand.laenderCode }}</ion-card-subtitle>
+                                            <ion-card-title>{{ warenkorbposten.warenkorbartikel.preis }} €</ion-card-title>
+                                            </ion-card-content>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                            </ion-card>
+                        </a>
                     </div>
-                </div>
-            </div>
-            
-            
-          </div>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col>
+                    <ion-card>
+                        <div class="price-calculation">
+                            <!--LINE-->
+                            <ion-row class="ion-justify-content-between">
+                                <div>Artikel ({{this.warenkorb.warenkorbpostenlist.length}})</div>
+                                <div>{{ this.warenkorb.artikelSumme }} €</div>
+                            </ion-row>
+                            <!--LINE-->
+                            
+                            <!--LINE-->
+                            <ion-row class="ion-justify-content-between">
+                                <div>Versandkosten</div>
+                                <div>{{ this.warenkorb.versandSumme }} €</div>
+                            </ion-row>
+                            <!--LINE-->
+                            
+                            <!--LINE-->
+                            <ion-row class="ion-justify-content-between">
+                                <div>Gesamt</div>
+                                <div>{{ this.warenkorb.gesamtSumme }} €</div>
+                            </ion-row>
+                            <!--LINE-->
+    
+                            <!--LINE-->
+                            <ion-button (click)="this.gotoBestellung()" expand="full" shape="round">Zur Kasse</ion-button>
+                        </div>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
         </div>
-    </div>
+        
 
-    <div *ngIf="this.warenkorb.warenkorbpostenlist.length == 0" class="warenkorb-leer">
-        <h3>Warenkorb ist leer!</h3>
-    </div>
-
-</div>
+        <!--Wenn Warenkorb leer ist-->
+        <div *ngIf="this.warenkorb.warenkorbpostenlist.length === 0" class="warenkorb-leer">
+            <h3>Warenkorb ist leer!</h3>
+        </div>
+    </ion-grid>
+</ion-content>

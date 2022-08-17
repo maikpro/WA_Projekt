@@ -5,8 +5,10 @@
         </ion-buttons>
         
         <ion-item slot="end">
-            <ion-icon name="cart"></ion-icon> 
-            <ion-badge *ngIf="this.warenkorbService.warenkorbArtikelAnzahl > 0" color="danger">{{ this.warenkorbService.warenkorbArtikelAnzahl }}</ion-badge>
+            <a href="/warenkorb">
+                <ion-icon name="cart"></ion-icon> 
+                <ion-badge *ngIf="this.warenkorbService.warenkorbArtikelAnzahl > 0" color="danger">{{ this.warenkorbService.warenkorbArtikelAnzahl }}</ion-badge>
+            </a>
         </ion-item>
     </ion-toolbar>
   </ion-header>
@@ -40,7 +42,7 @@
                         
                         <!-- Action Buttons -->
                         <div class="action-buttons">
-                            <ion-button color="primary" expand="block" shape="round" (click)="this.artikelInWarenkorb()">In den Warenkorb</ion-button>
+                            <ion-button color="primary" expand="block" shape="round" *ngIf="!this.isArtikelInWarenkorb" (click)="this.artikelInWarenkorb()">In den Warenkorb</ion-button>
                             <ion-button color="medium" expand="block" shape="round" fill="outline" *ngIf="!this.isArtikelOnBeobachtungsliste && this.isLogged" (click)="this.artikelInBeobachtungsliste()">
                                 <ion-icon slot="start" name="heart-outline"></ion-icon> 
                                 Auf die Beobachtungsliste

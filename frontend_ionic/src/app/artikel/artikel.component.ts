@@ -10,6 +10,7 @@ import { WarenkorbService } from '../shared/services/warenkorb.service';
 import { KeycloakService } from 'keycloak-angular';
 import { AccountService } from '../shared/services/account.service';
 import { Account } from '../shared/models/Account';
+import { Warenkorb } from '../shared/models/Warenkorb';
 
 
 
@@ -24,6 +25,7 @@ export class ArtikelComponent implements OnInit {
   public error?: HttpErrorResponse;
   public isLogged: boolean = false;
   public isArtikelOnBeobachtungsliste: boolean = false;
+  public isArtikelInWarenkorb: boolean = false;
 
   constructor(
     private route: ActivatedRoute, 
@@ -55,6 +57,8 @@ export class ArtikelComponent implements OnInit {
         this.error=error;
       });
     });
+
+    this.checkIfArtikelInWarenkorb();
   }
 
   public artikelInWarenkorb(): void {
@@ -62,6 +66,7 @@ export class ArtikelComponent implements OnInit {
       console.log(warenkorb);
       this.warenkorbService.updateWarenkorbArtikelAnzahl();
       //this.notifyService.showSuccessMessage(`Du hast den Artikel '${this.artikel.name}' in den Warenkorb gelegt`);
+      this.checkIfArtikelInWarenkorb();
     });
   }
 
@@ -81,6 +86,13 @@ export class ArtikelComponent implements OnInit {
         this.isArtikelOnBeobachtungsliste = account.beobachtungsliste.some( beobachtungsartikel => beobachtungsartikel.artikelIdReference === this.id);
         console.log(this.isArtikelOnBeobachtungsliste);
       }
+    });
+  }
+
+  private checkIfArtikelInWarenkorb(): void {
+    this.warenkorbService.getWarenkorb().subscribe((warenkorb: Warenkorb) => {
+      console.log(warenkorb);
+      this.isArtikelInWarenkorb = warenkorb.warenkorbpostenlist.some( wp => wp.warenkorbartikel.artikelIdReference === this.artikel.id );
     });
   }
 }

@@ -1,8 +1,8 @@
-import { Artikelzustand } from "./Artikelzustand";
-import { Versand } from "./Versand";
+import { Artikelzustand } from './Artikelzustand';
+import { Versand } from './Versand';
 
 export interface Warenkorb {
-    id: number,
+    id: number;
     artikelSumme?: number;
     versandSumme?: number;
     gesamtSumme: number;

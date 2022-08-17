@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-warenkorb',
   templateUrl: './warenkorb.component.html',
-  styleUrls: ['./warenkorb.component.css']
+  styleUrls: ['./warenkorb.component.scss']
 })
 export class WarenkorbComponent implements OnInit {
   public warenkorb!: Warenkorb;
