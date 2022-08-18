@@ -1,11 +1,14 @@
-<div class="modal-header">
-  <h4 class="modal-title">{{ title }}</h4>
-  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.close(false)"></button>
-</div>
-<div class="modal-body">
-  <p>{{ message }}</p>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-outline-primary" (click)="activeModal.close(true)">Ja</button>
-  <button type="button" class="btn btn-outline-danger" (click)="activeModal.close(false)">Nein</button>
-</div>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="middle" (click)="cancel()">{{ this.cancelButtonText }}</ion-button>
+    </ion-buttons>
+    <ion-title>{{ this.title }}</ion-title>
+    <ion-buttons slot="end" *ngIf="this.confirmButtonText">
+      <ion-button (click)="confirm()">{{ this.confirmButtonText }}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <p>{{ this.message }}</p>
+</ion-content>

@@ -11,6 +11,7 @@ import { KeycloakService } from 'keycloak-angular';
 import { AccountService } from '../shared/services/account.service';
 import { Account } from '../shared/models/Account';
 import { Warenkorb } from '../shared/models/Warenkorb';
+import { NotificationService } from '../shared/services/notification.service';
 
 
 
@@ -33,6 +34,7 @@ export class ArtikelComponent implements OnInit {
     public warenkorbService: WarenkorbService, 
     private keycloakService: KeycloakService, 
     private accountService: AccountService, 
+    private notifyService: NotificationService
   ) {}
 
   public ngOnInit(): void {
@@ -65,7 +67,7 @@ export class ArtikelComponent implements OnInit {
     this.artikelService.addArtikelToWarenkorb(this.artikel).subscribe(warenkorb => {
       console.log(warenkorb);
       this.warenkorbService.updateWarenkorbArtikelAnzahl();
-      //this.notifyService.showSuccessMessage(`Du hast den Artikel '${this.artikel.name}' in den Warenkorb gelegt`);
+      this.notifyService.showSuccessMessage(`Du hast den Artikel '${this.artikel.name}' in den Warenkorb gelegt`);
       this.checkIfArtikelInWarenkorb();
     });
   }
@@ -74,7 +76,7 @@ export class ArtikelComponent implements OnInit {
     this.artikelService.addArtikelToBeobachtungsliste(this.artikel).subscribe(artikel => {
       console.log(artikel);
       this.artikel = artikel;
-      //this.notifyService.showSuccessMessage(`Du hast den Artikel '${this.artikel.name}' auf die Beobachtungsliste gesetzt`);
+      this.notifyService.showSuccessMessage(`Du hast den Artikel '${this.artikel.name}' auf die Beobachtungsliste gesetzt`);
       this.checkIsArtikelOnBeobachtungsliste();
     });
   }

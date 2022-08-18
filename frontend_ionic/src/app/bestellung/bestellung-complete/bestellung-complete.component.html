@@ -1,0 +1,13 @@
+<div class="container mt-3">
+    <h2>Die Bestellung wurde abgeschlossen</h2>
+    <p>Bestell-ID: {{ this.bestellung.id }}</p>
+    <div *ngFor="let bestellposten of this.bestellung.bestellposten" class="card">
+        <img src="https://via.placeholder.com/200x200" alt="Card image cap">
+        <div class="card-body">
+            <h2 class="card-title">{{ bestellposten.warenkorbartikel.name }}</h2>
+            <p class="card-text text-primary price">{{ bestellposten.warenkorbartikel.preis }} €</p>
+            <p class="card-text">Versandkosten: {{ bestellposten.warenkorbartikel.versand.kosten }} €</p>
+            <p class="card-text"> Versand aus: {{ bestellposten.warenkorbartikel.versand.laenderCode }}</p>
+        </div>
+    </div>
+</div>

@@ -6,6 +6,7 @@ import { KeycloakService } from 'keycloak-angular';
 import { Account } from 'src/app/shared/models/Account';
 import { KeycloakAccount } from 'src/app/shared/models/KeycloakAccount';
 import { AccountService } from 'src/app/shared/services/account.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class AccountComponent implements OnInit {
     private accountService: AccountService,
     private formBuilder: FormBuilder,
     private keycloakService: KeycloakService,
+    private notifyService: NotificationService
     //private bestellService: BestellungService
   ) { }
 
@@ -100,7 +102,7 @@ export class AccountComponent implements OnInit {
       };
       this.accountService.createAccount(account).subscribe(res => {
         console.log(res);
-        //this.notifyService.showSuccessMessage('Der Account wurde in der myBay Datenbank angelegt!');
+        this.notifyService.showSuccessMessage('Der Account wurde in der myBay Datenbank angelegt!');
         this.submitted = false;
       });
 
@@ -127,7 +129,7 @@ export class AccountComponent implements OnInit {
       };
       this.accountService.updateAccount(account).subscribe(res => {
         console.log(res);
-        //this.notifyService.showSuccessMessage('Deine Accountdaten wurden aktualisiert!');
+        this.notifyService.showSuccessMessage('Deine Accountdaten wurden aktualisiert!');
         this.submitted = false;
       });
 
@@ -135,27 +137,33 @@ export class AccountComponent implements OnInit {
   }
 
   public async delete() {
-    /*const result = await this.notifyService.confirm('Account löschen', `Wollen Sie den Account mit dem Usernamen '${this.username}' wirklich löschen?`);
+    const result = await this.notifyService.confirm('Account löschen', `Wollen Sie den Account mit dem Usernamen '${this.username}' wirklich löschen?`, 'Nein', 'Ja');
     console.log(result);
 
     if(result){
       this.accountService.deleteAccount().subscribe(res => {
         console.log(res);
         this.notifyService.showSuccessMessage('Du hast den Account gelöscht!');
-        this.keycloakService.logout('http://localhost:4200/home');
+        this.keycloakService.logout('http://localhost:8100/tabs/home');
       });
-    }*/
+    }
   }
 
   public successMessageTest(): void{
-    //this.notifyService.showSuccessMessage('Eine Success Message!');
+    this.notifyService.showSuccessMessage('Eine Success Message!');
   }
 
   public errorMessageTest(): void {
-    //this.notifyService.showErrorMessage('Eine Error Message!');
+    this.notifyService.showErrorMessage('Eine Error Message!');
   }
 
-  public testKaeufe(): void {
-    //this.bestellService.getKaeufe().subscribe(res => console.log(res));
+  public async testConfirmModal() {
+    const result = await this.notifyService.confirm('Modaltitle', 'Modalmessage', 'Nein', 'Ja');
+    console.log(result);
+  }
+
+  public async testWarningModal() {
+    const result = await this.notifyService.confirm('Modaltitle', 'Modalmessage', 'Ok');
+    console.log(result);
   }
 }

@@ -12,7 +12,10 @@ import { AccountComponent } from './account-overview/account/account.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ArtikelComponent } from './artikel/artikel.component';
+import { BestellungCompleteComponent } from './bestellung/bestellung-complete/bestellung-complete.component';
+import { BestellungComponent } from './bestellung/bestellung.component';
 import { initializeKeycloak } from './init/keycloak-init.factory';
+import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 import { GlobalErrorHandler } from './shared/misc/global-error-handler';
 import { WarenkorbComponent } from './warenkorb/warenkorb.component';
 
@@ -21,7 +24,10 @@ import { WarenkorbComponent } from './warenkorb/warenkorb.component';
     AppComponent,
     ArtikelComponent,
     WarenkorbComponent,
-    AccountComponent
+    AccountComponent,
+    ConfirmDialogComponent,
+    BestellungComponent,
+    BestellungCompleteComponent
   ],
   imports: [
     BrowserModule,

@@ -9,132 +9,110 @@
     </ion-toolbar>
 </ion-header>
 
-<div class="container">
-    <h2>Account</h2>
-    <div class="adresse-container">
+<ion-content [fullscreen]="true">
+
+    <ion-list>
         <form [formGroup]="accountForm">
             <!--username-->
-            <div class="form-group d-flex justify-content-between align-items-center">
-                <label for="username">Username</label>
-                
-                <div class="input-field">
-                    <input formControlName="username" [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" type="text" class="form-control" placeholder="Username..." readonly>
-                
-                    <!--Validierung email -->
-                    <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
-                        <div *ngIf="f['username'].errors['required']">Username ist erforderlich</div>
-                    </div>
-                </div>
-            </div>
+            <ion-item>
+                <ion-label *ngIf="!f['username'].errors" position="floating">Username</ion-label>
+                <ion-label *ngIf="submitted && f['username'].errors" position="floating">
+                    <div *ngIf="f['username'].errors['required']">Username ist erforderlich*</div>
+                </ion-label>
+                <ion-input formControlName="username" [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" type="text" class="form-control" placeholder="Username..." readonly></ion-input>
+            </ion-item>
+
             <!--email-->
-            <div class="form-group d-flex justify-content-between align-items-center">
-                <label for="email">E-Mail</label>
-                
-                <div class="input-field">
-                    <input formControlName="email" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" type="text" class="form-control" placeholder="E-Mail..." readonly>
-                
-                    <!--Validierung email -->
-                    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-                        <div *ngIf="f['email'].errors['required']">E-Mail ist erforderlich</div>
-                    </div>
-                </div>
-            </div>
+            <ion-item>
+                <ion-label *ngIf="!f['email'].errors" position="floating">E-Mail</ion-label>
+                <ion-label *ngIf="submitted && f['email'].errors" position="floating">
+                    <div *ngIf="f['email'].errors['required']">E-Mail ist erforderlich*</div>
+                </ion-label>
+                <ion-input formControlName="email" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" type="text" class="form-control" placeholder="E-Mail..." readonly></ion-input>
+            </ion-item>
+
             <!--Vorname-->
-            <div class="form-group d-flex justify-content-between align-items-center">
-                <label for="vorname">Vorname</label>
-                
-                <div class="input-field">
-                    <input formControlName="vorname" [ngClass]="{ 'is-invalid': submitted && f['vorname'].errors }" type="text" class="form-control" placeholder="Vorname...">
-                
-                    <!--Validierung Vorname -->
-                    <div *ngIf="submitted && f['vorname'].errors" class="invalid-feedback">
-                        <div *ngIf="f['vorname'].errors['required']">Vorname ist erforderlich</div>
-                    </div>
-                </div>
-            </div>
+            <ion-item>
+                <ion-label *ngIf="!f['vorname'].errors" position="floating">Vorname</ion-label>
+                <ion-label *ngIf="submitted && f['vorname'].errors" position="floating">
+                    <div *ngIf="f['vorname'].errors['required']">Vorname ist erforderlich*</div>
+                </ion-label>
+                <ion-input formControlName="vorname" [ngClass]="{ 'is-invalid': submitted && f['vorname'].errors }" type="text" class="form-control" placeholder="Vorname..."></ion-input>
+            </ion-item>
+
             <!--Nachname-->
-            <div class="form-group d-flex justify-content-between align-items-center">
-                <label for="nachname">Nachname</label>
-                
-                <div class="input-field">
-                     <input formControlName="nachname" [ngClass]="{ 'is-invalid': submitted && f['nachname'].errors }" type="text" class="form-control" placeholder="Nachname...">
+            <ion-item>
+                <ion-label *ngIf="!f['nachname'].errors" position="floating">Nachname</ion-label>
+                <ion-label *ngIf="submitted && f['nachname'].errors" position="floating">
+                    <div *ngIf="f['nachname'].errors['required']">Nachname ist erforderlich*</div>
+                </ion-label>
+                <ion-input formControlName="nachname" [ngClass]="{ 'is-invalid': submitted && f['nachname'].errors }" type="text" class="form-control" placeholder="Nachname..."></ion-input>
+            </ion-item>
 
-                    <!--Validierung Nachname -->
-                    <div *ngIf="submitted && f['nachname'].errors" class="invalid-feedback">
-                        <div *ngIf="f['nachname'].errors['required']">Nachname ist erforderlich</div>
-                    </div>
-                </div>
-            </div>
             <!--Strasse-->
-            <div class="form-group d-flex justify-content-between align-items-center">
-                <label for="strasse">Straße</label>
+            <ion-item>
+                <ion-label *ngIf="!f['strasse'].errors" position="floating">Straße</ion-label>
+                <ion-label *ngIf="submitted && f['strasse'].errors" position="floating">
+                    <div *ngIf="f['strasse'].errors['required']">Straße ist erforderlich*</div>
+                </ion-label>
+                <ion-input formControlName="strasse" [ngClass]="{ 'is-invalid': submitted && f['strasse'].errors }" type="text" class="form-control" placeholder="Straße..."></ion-input>
+            </ion-item>
 
-                <div class="input-field">
-                    <input formControlName="strasse" [ngClass]="{ 'is-invalid': submitted && f['strasse'].errors }" type="text" class="form-control" placeholder="Straße...">
-
-                    <!--Validierung strasse -->
-                    <div *ngIf="submitted && f['strasse'].errors" class="invalid-feedback">
-                        <div *ngIf="f['strasse'].errors['required']">Straße ist erforderlich</div>
-                    </div>
-                </div>
-            </div>
             <!--Hausnr-->
-            <div class="form-group d-flex justify-content-between align-items-center">
-                <label for="hausnr">Hausnummer</label>
+            <ion-item>
+                <ion-label *ngIf="!f['hausnr'].errors" position="floating">Hausnummer</ion-label>
+                <ion-label *ngIf="submitted && f['hausnr'].errors" position="floating">
+                    <div *ngIf="f['hausnr'].errors['required']">Hausnummer ist erforderlich*</div>
+                </ion-label>
+                <ion-input formControlName="hausnr" [ngClass]="{ 'is-invalid': submitted && f['hausnr'].errors }" type="text" class="form-control" placeholder="Hausnummer..."></ion-input>
+            </ion-item>
 
-                <div class="input-field">
-                    <input formControlName="hausnr" [ngClass]="{ 'is-invalid': submitted && f['hausnr'].errors }" type="text" class="form-control" placeholder="Hausnummer...">
-
-                    <!--Validierung hausnummer -->
-                    <div *ngIf="submitted && f['hausnr'].errors" class="invalid-feedback">
-                        <div *ngIf="f['hausnr'].errors['required']">Hausnummer ist erforderlich</div>
-                    </div>
-                </div>
-
-            </div>
             <!--PLZ-->
-            <div class="form-group d-flex justify-content-between align-items-center">
-                <label for="plz">PLZ</label>
-
-                <div class="input-field">
-                    <input formControlName="plz" [ngClass]="{ 'is-invalid': submitted && f['plz'].errors }" type="text" class="form-control" placeholder="PLZ...">
-
-                    <!--Validierung plz -->
-                    <div *ngIf="submitted && f['plz'].errors" class="invalid-feedback">
-                        <div *ngIf="f['plz'].errors['required']">PLZ ist erforderlich</div>
-                    </div>
-                </div>
-
-            </div>
+            <ion-item>
+                <ion-label *ngIf="!f['plz'].errors" position="floating">PLZ</ion-label>
+                <ion-label *ngIf="submitted && f['plz'].errors" position="floating">
+                    <div *ngIf="f['plz'].errors['required']">PLZ ist erforderlich*</div>
+                </ion-label>
+                <ion-input formControlName="plz" [ngClass]="{ 'is-invalid': submitted && f['plz'].errors }" type="text" class="form-control" placeholder="PLZ..."></ion-input>
+            </ion-item>
+            
             <!--Ort-->
-            <div class="form-group d-flex justify-content-between align-items-center">
-                <label for="ort">Ort</label>
-
-                <div class="input-field">
-                    <input formControlName="ort" [ngClass]="{ 'is-invalid': submitted && f['ort'].errors }" type="text" class="form-control" placeholder="Ort...">
-                    
-                    <!--Validierung Ort -->
-                    <div *ngIf="submitted && f['ort'].errors" class="invalid-feedback">
-                        <div *ngIf="f['ort'].errors['required']">Ort ist erforderlich</div>
-                    </div>
-                </div>
-            </div>
+            <ion-item>
+                <ion-label *ngIf="!f['ort'].errors" position="floating">Ort</ion-label>
+                <ion-label *ngIf="submitted && f['ort'].errors" position="floating">
+                    <div *ngIf="f['ort'].errors['required']">Ort ist erforderlich*</div>
+                </ion-label>
+                <ion-input formControlName="ort" [ngClass]="{ 'is-invalid': submitted && f['ort'].errors }" type="text" class="form-control" placeholder="Ort..."></ion-input>
+            </ion-item>
         </form>
-        <div class="d-flex justify-content-end">
-            <button *ngIf="!this.isCreated" (click)="this.save()" class="btn btn-primary">Speichern</button>
-            <button *ngIf="this.isCreated" (click)="this.update()" class="btn btn-primary">Aktualisieren</button>
-        </div>
-    </div>
+    </ion-list>
 
+    <ion-row class="ion-justify-content-end account-actions">
+        <!--Speichern-->
+        <ion-button *ngIf="!this.isCreated" (click)="this.save()" shape="round">Speichern</ion-button>
+        
+        <!--Aktualisieren-->
+        <ion-button *ngIf="this.isCreated" (click)="this.update()" shape="round">Aktualisieren</ion-button>
+    </ion-row>
+
+
+    <!--Account löschen-->
+    <ion-list>
+        <ion-item>
+            <ion-label>Account löschen</ion-label>
+            <ion-button (click)="this.delete()" color="danger" shape="round">Account löschen</ion-button>
+            <ion-label *ngIf="this.keycloakAccount">Keycloak Account-ID: {{ this.keycloakAccount.id }}</ion-label>
+        </ion-item>
+    </ion-list>
+    
+    <!---->
     <div class="delete-account-container">
-        <div class="form-group d-flex justify-content-between align-items-center">
-            <h2>Account löschen</h2>
-            <button (click)="this.delete()" class="btn btn-danger">Account löschen</button>
-        </div>
         <p *ngIf="this.keycloakAccount">Keycloak Account-ID: {{ this.keycloakAccount.id }}</p>
 
-        <button (click)="this.successMessageTest()" class="btn btn-success">Test SuccessMessage!</button>
-        <button (click)="this.errorMessageTest()" class="btn btn-danger">Test ErrorMessage!</button>
-        <button (click)="this.testKaeufe()" class="btn btn-primary">Test Käufe!</button>
+        <ion-button color="success" (click)="this.successMessageTest()" class="btn btn-success">Test SuccessMessage!</ion-button>
+        <ion-button color="danger" (click)="this.errorMessageTest()" class="btn btn-danger">Test ErrorMessage!</ion-button>
+        <ion-button color="tertiary" (click)="this.testConfirmModal()" class="btn btn-primary">Test ConfirmModal!</ion-button>
+        <ion-button color="warning" (click)="this.testWarningModal()" class="btn btn-primary">Test WarningModal!</ion-button>
     </div>
-</div>
+    <!---->
+</ion-content>

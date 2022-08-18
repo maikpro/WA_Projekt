@@ -1,0 +1,80 @@
+<div class="container" *ngIf="this.account && this.warenkorb">
+    <div class="row mt-3">
+        <h2>Bestellung</h2>
+        <div  class="col-6">
+            <div class="card">
+                <div class="card-header">
+                    Versand an
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{ this.account.vorname }} {{ this.account.nachname }}</p>
+                    <p class="card-text">{{ this.account.adresse.strasse }} {{ this.account.adresse.hausnr }}</p>
+                    <p class="card-text">{{ this.account.adresse.plz }} {{ this.account.adresse.ort }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card">
+              <div class="container p-2">
+                  <!--LINE-->
+                  <div class="row">
+                      <div class="col card-text">Artikel ({{this.warenkorb.warenkorbpostenlist.length}})</div>
+                      <div class="col card-text d-flex justify-content-end">{{ this.warenkorb.artikelSumme }} €</div>
+                  </div>
+                  <!--LINE-->
+                  
+                  <!--LINE-->
+                  <div class="row">
+                      <div class="col card-text">Versandkosten</div>
+                      <div class="col card-text d-flex justify-content-end">{{ this.warenkorb.versandSumme }} €</div>
+                  </div>
+                  <!--LINE-->
+                  
+                  <!--LINE-->
+                  <div class="row line-top">
+                      <div class="col card-text">Gesamt</div>
+                      <div class="col card-text d-flex justify-content-end">{{ this.warenkorb.gesamtSumme }} €</div>
+                  </div>
+                  <!--LINE-->
+  
+                  <div class="row">
+                      <div class="col d-flex justify-content-end">
+                          <button (click)="this.bestellungAbschliessen()" class="btn btn-primary">Bestellung abschließen</button>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-6">
+            <div class="card">
+                <form [formGroup]="this.bestellForm">
+                    <div class="card-header">
+                        Bezahlen mit
+                    </div>
+                    <div class="bezahlmethode p-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="PAYPAL" formControlName="bezahlmethode">
+                            <label class="form-check-label">
+                            PayPal
+                            </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" value="LASTSCHRIFT" formControlName="bezahlmethode">
+                        <label class="form-check-label">
+                            Lastschrift
+                        </label>
+                        </div>
+
+                        <!--Validierung bezahlmethode -->
+                        <div class="bezahlmethode-error" *ngIf="submitted && f['bezahlmethode'].errors">
+                            <div *ngIf="f['bezahlmethode'].errors['required']">Wählen Sie eine Bezahlmethode aus</div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
