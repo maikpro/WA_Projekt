@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-searchbar [formControl]="searchField" debounce="500"></ion-searchbar>
+    <ion-searchbar [formControl]="searchField" debounce="500" placeholder="Suchen..." (search)="gotoSearchpage()" padding></ion-searchbar>
 
     <ion-item slot="end">
       <a href="/warenkorb">
@@ -21,7 +21,6 @@
         </ion-item>
       </a>
     </div>
-    
   </ion-list>
 
 

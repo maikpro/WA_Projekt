@@ -24,3 +24,16 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.line {
+    margin: 5px 0 5px 0;
+    border-top: 1px solid #86888f;
+}
+
+.price-calculation {
+    padding: 10px;
+}
+
+.price-calculation ion-button {
+    margin-top: 20px;
+}

@@ -1,80 +1,146 @@
-<div class="container" *ngIf="this.account && this.warenkorb">
-    <div class="row mt-3">
-        <h2>Bestellung</h2>
-        <div  class="col-6">
-            <div class="card">
-                <div class="card-header">
-                    Versand an
-                </div>
-                <div class="card-body">
-                    <p class="card-text">{{ this.account.vorname }} {{ this.account.nachname }}</p>
-                    <p class="card-text">{{ this.account.adresse.strasse }} {{ this.account.adresse.hausnr }}</p>
-                    <p class="card-text">{{ this.account.adresse.plz }} {{ this.account.adresse.ort }}</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="card">
-              <div class="container p-2">
-                  <!--LINE-->
-                  <div class="row">
-                      <div class="col card-text">Artikel ({{this.warenkorb.warenkorbpostenlist.length}})</div>
-                      <div class="col card-text d-flex justify-content-end">{{ this.warenkorb.artikelSumme }} €</div>
-                  </div>
-                  <!--LINE-->
-                  
-                  <!--LINE-->
-                  <div class="row">
-                      <div class="col card-text">Versandkosten</div>
-                      <div class="col card-text d-flex justify-content-end">{{ this.warenkorb.versandSumme }} €</div>
-                  </div>
-                  <!--LINE-->
-                  
-                  <!--LINE-->
-                  <div class="row line-top">
-                      <div class="col card-text">Gesamt</div>
-                      <div class="col card-text d-flex justify-content-end">{{ this.warenkorb.gesamtSumme }} €</div>
-                  </div>
-                  <!--LINE-->
-  
-                  <div class="row">
-                      <div class="col d-flex justify-content-end">
-                          <button (click)="this.bestellungAbschliessen()" class="btn btn-primary">Bestellung abschließen</button>
-                      </div>
-                  </div>
-              </div>
-            </div>
-          </div>
-    </div>
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title>
+            Bestellung
+        </ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
 
-    <div class="row mt-3">
-        <div class="col-6">
-            <div class="card">
+<ion-content [fullscreen]="true">
+    <ion-grid *ngIf="this.warenkorb && this.account && this.warenkorb.warenkorbpostenlist.length > 0">
+        <!--Desktop Version-->
+        <ion-row class="ion-hide-lg-down">
+            <!--Adresse-->
+            <ion-col size="5">
+                <ion-card>
+                    <ion-card-header>
+                        <ion-card-subtitle>Adresse</ion-card-subtitle>
+                    </ion-card-header>
+                    
+                    <ion-card-content>
+                        <p>{{ this.account.vorname }} {{ this.account.nachname }}</p>
+                        <p>{{ this.account.adresse.strasse }} {{ this.account.adresse.hausnr }}</p>
+                        <p>{{ this.account.adresse.plz }} {{ this.account.adresse.ort }}</p>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+            
+            <!--Preis-->
+            <ion-col size="3" offset="4">
+                <ion-card class="price-calculation">
+                    <ion-card-content>
+                        <!--LINE-->
+                        <ion-row class="ion-justify-content-between">
+                            <p>Artikel ({{this.warenkorb.warenkorbpostenlist.length}})</p>
+                            <p>{{ this.warenkorb.artikelSumme }} €</p>
+                        </ion-row>
+                        <!--LINE-->
+                        
+                        <!--LINE-->
+                        <ion-row class="ion-justify-content-between">
+                            <p>Versandkosten</p>
+                            <p>{{ this.warenkorb.versandSumme }} €</p>
+                        </ion-row>
+                        <!--LINE-->
+                        
+                        <!--LINE-->
+                        <ion-row class="ion-justify-content-between line">
+                            <p>Gesamt</p>
+                            <p>{{ this.warenkorb.gesamtSumme }} €</p>
+                        </ion-row>
+                        <ion-button (click)="this.bestellungAbschliessen()" expand="full" shape="round">Bestellung abschließen</ion-button>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+
+        <!--Bezahlmethode-->
+        <ion-row class="ion-hide-lg-down">
+            <ion-col size="5">
                 <form [formGroup]="this.bestellForm">
-                    <div class="card-header">
-                        Bezahlen mit
-                    </div>
-                    <div class="bezahlmethode p-2">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" value="PAYPAL" formControlName="bezahlmethode">
-                            <label class="form-check-label">
-                            PayPal
-                            </label>
-                        </div>
-                        <div class="form-check">
-                        <input class="form-check-input" type="radio" value="LASTSCHRIFT" formControlName="bezahlmethode">
-                        <label class="form-check-label">
-                            Lastschrift
-                        </label>
-                        </div>
+                    <ion-card>
+                        <ion-card-header>
+                            <ion-card-subtitle>Bezahlmethode</ion-card-subtitle>
+                        </ion-card-header>
+                        
+                        <ion-card-content>
+                            <ion-list>
+                                <ion-radio-group formControlName="bezahlmethode">
+                                    <ion-item>
+                                        <ion-label>PayPal</ion-label>
+                                        <ion-radio slot="start" value="PAYPAL"></ion-radio>
+                                    </ion-item>
+                                    
+                                    <ion-item>
+                                        <ion-label>Lastschrift</ion-label>
+                                        <ion-radio slot="start" value="LASTSCHRIFT"></ion-radio>
+                                    </ion-item>
 
-                        <!--Validierung bezahlmethode -->
-                        <div class="bezahlmethode-error" *ngIf="submitted && f['bezahlmethode'].errors">
-                            <div *ngIf="f['bezahlmethode'].errors['required']">Wählen Sie eine Bezahlmethode aus</div>
-                        </div>
-                    </div>
+                                    <!--Validierung bezahlmethode -->
+                                    <ion-item class="bezahlmethode-error" *ngIf="submitted && f['bezahlmethode'].errors">
+                                        <div *ngIf="f['bezahlmethode'].errors['required']">Wählen Sie eine Bezahlmethode aus</div>
+                                    </ion-item>
+                                </ion-radio-group>
+                            </ion-list>
+                        </ion-card-content>
+                    </ion-card>
                 </form>
-            </div>
+            </ion-col>
+        </ion-row>
+
+        <!--Mobile Version-->
+        <div class="ion-hide-lg-up">
+            <!--Adresse-->
+            <ion-row>
+                <ion-col>
+                    <ion-card>
+                        <ion-card-header>
+                            <ion-card-subtitle>Adresse</ion-card-subtitle>
+                        </ion-card-header>
+                        
+                        <ion-card-content>
+                            Keep close to Nature's heart... and break clear away, once in awhile,
+                            and climb a mountain or spend a week in the woods. Wash your spirit clean.
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+
+            <!--Bezahlmethode-->
+            <ion-row>
+                <ion-col>
+                    <ion-card>
+                        <ion-card-header>
+                            <ion-card-subtitle>Bezahlmethode</ion-card-subtitle>
+                        </ion-card-header>
+                        
+                        <ion-card-content>
+                            Keep close to Nature's heart... and break clear away, once in awhile,
+                            and climb a mountain or spend a week in the woods. Wash your spirit clean.
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+
+            <!--Preis-->
+            <ion-row>
+                <ion-col>
+                    <ion-card>
+                        <ion-card-header>
+                            <ion-card-subtitle>Preis</ion-card-subtitle>
+                        </ion-card-header>
+                        
+                        <ion-card-content>
+                            Keep close to Nature's heart... and break clear away, once in awhile,
+                            and climb a mountain or spend a week in the woods. Wash your spirit clean.
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
         </div>
-    </div>
-</div>
+
+    </ion-grid>
+</ion-content>

@@ -25,33 +25,32 @@
         <ion-row class="ion-hide-lg-down">
             <ion-col size="9">
                 <div *ngFor="let warenkorbposten of this.warenkorb.warenkorbpostenlist">
-                    
-                        <ion-card>
-                            <ion-grid>
-                                <ion-row class="ion-float-left">
-                                    <!-- Artikel Image -->
-                                    <a href="/tabs/search/artikel/id/{{warenkorbposten.warenkorbartikel.artikelIdReference}}">
-                                        <ion-col>
-                                            <img src="https://via.placeholder.com/150x150" alt="{{ warenkorbposten.warenkorbartikel.name }}_img">
-                                        </ion-col>
-                                    </a>
-                                    
-                                    <!--Artikel Content-->
+                    <ion-card>
+                        <ion-grid>
+                            <ion-row class="ion-float-left">
+                                <!-- Artikel Image -->
+                                <a href="/tabs/search/artikel/id/{{warenkorbposten.warenkorbartikel.artikelIdReference}}">
                                     <ion-col>
-                                        <ion-card-content>
-                                            <a href="/tabs/search/artikel/id/{{warenkorbposten.warenkorbartikel.artikelIdReference}}">
-                                                <ion-card-title>{{ warenkorbposten.warenkorbartikel.name }}</ion-card-title>
-                                                <ion-card-subtitle>Artikelzustand: {{ warenkorbposten.warenkorbartikel.warenkorbartikelzustand }}</ion-card-subtitle>
-                                                <ion-card-subtitle>Versandkosten: {{ warenkorbposten.warenkorbartikel.versand.kosten }} €</ion-card-subtitle>
-                                                <ion-card-subtitle>Versand aus: {{ warenkorbposten.warenkorbartikel.versand.laenderCode }}</ion-card-subtitle>
-                                                <ion-card-title>{{ warenkorbposten.warenkorbartikel.preis }} €</ion-card-title>
-                                            </a>
-                                            <ion-button color="danger" *ngIf="warenkorbposten.warenkorbartikel.id !== undefined" (click)="this.deleteArtikel(warenkorbposten.warenkorbartikel.id)">Vom Warenkorb entfernen</ion-button>
-                                        </ion-card-content>
+                                        <img src="https://via.placeholder.com/150x150" alt="{{ warenkorbposten.warenkorbartikel.name }}_img">
                                     </ion-col>
-                                </ion-row>
-                            </ion-grid>
-                        </ion-card>
+                                </a>
+                                
+                                <!--Artikel Content-->
+                                <ion-col>
+                                    <ion-card-content>
+                                        <a href="/tabs/search/artikel/id/{{warenkorbposten.warenkorbartikel.artikelIdReference}}">
+                                            <ion-card-title>{{ warenkorbposten.warenkorbartikel.name }}</ion-card-title>
+                                            <ion-card-subtitle>Artikelzustand: {{ warenkorbposten.warenkorbartikel.warenkorbartikelzustand }}</ion-card-subtitle>
+                                            <ion-card-subtitle>Versandkosten: {{ warenkorbposten.warenkorbartikel.versand.kosten }} €</ion-card-subtitle>
+                                            <ion-card-subtitle>Versand aus: {{ warenkorbposten.warenkorbartikel.versand.laenderCode }}</ion-card-subtitle>
+                                            <ion-card-title>{{ warenkorbposten.warenkorbartikel.preis }} €</ion-card-title>
+                                        </a>
+                                        <ion-button color="danger" *ngIf="warenkorbposten.warenkorbartikel.id !== undefined" (click)="this.deleteArtikel(warenkorbposten.warenkorbartikel.id)">Vom Warenkorb entfernen</ion-button>
+                                    </ion-card-content>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-card>
                 </div>
             </ion-col>
 

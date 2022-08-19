@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Artikel } from '../shared/models/Artikel';
 import { ArtikelService } from '../shared/services/artikel.service';
 import { SearchService } from '../shared/services/search.service';
@@ -16,12 +17,22 @@ export class HomePage implements OnInit {
   public isSearching = false;
 
   public artikelList: Artikel[] = [];
+  private suchwort: string;
 
-  constructor(private searchService: SearchService, private artikelService: ArtikelService, public warenkorbService: WarenkorbService) {}
+  constructor(private router: Router,
+    private searchService: SearchService,
+    private artikelService: ArtikelService,
+    public warenkorbService: WarenkorbService
+  ) {}
 
   public ngOnInit(): void {
     this.search();
     this.latestArtikel();
+  }
+
+  public gotoSearchpage(): void {
+    console.log('Gehe zur Suche anzeigen...');
+    this.router.navigateByUrl(`/tabs/search/suchwort/${this.suchwort}`);
   }
 
   /**
@@ -31,6 +42,7 @@ export class HomePage implements OnInit {
     this.searchField.valueChanges.subscribe(searchInput => {
       if(this.searchField.value.length > 0){
         this.isSearching = true;
+        this.suchwort = searchInput;
         this.searchService.getSearchResults(searchInput).subscribe(response => {
           this.results = response;
           console.log(this.results);

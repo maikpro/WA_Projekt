@@ -7,7 +7,7 @@ import { BestellungService } from '../bestellung.service';
 @Component({
   selector: 'app-bestellung-complete',
   templateUrl: './bestellung-complete.component.html',
-  styleUrls: ['./bestellung-complete.component.css']
+  styleUrls: ['./bestellung-complete.component.scss']
 })
 export class BestellungCompleteComponent implements OnInit {
   public id!: number;

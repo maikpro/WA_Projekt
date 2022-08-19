@@ -1,13 +1,30 @@
-<div class="container mt-3">
-    <h2>Die Bestellung wurde abgeschlossen</h2>
-    <p>Bestell-ID: {{ this.bestellung.id }}</p>
-    <div *ngFor="let bestellposten of this.bestellung.bestellposten" class="card">
-        <img src="https://via.placeholder.com/200x200" alt="Card image cap">
-        <div class="card-body">
-            <h2 class="card-title">{{ bestellposten.warenkorbartikel.name }}</h2>
-            <p class="card-text text-primary price">{{ bestellposten.warenkorbartikel.preis }} €</p>
-            <p class="card-text">Versandkosten: {{ bestellposten.warenkorbartikel.versand.kosten }} €</p>
-            <p class="card-text"> Versand aus: {{ bestellposten.warenkorbartikel.versand.laenderCode }}</p>
-        </div>
-    </div>
-</div>
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title *ngIf="this.bestellung">
+            Bestellung (ID: {{ this.bestellung.id }}) wurde abgeschlossen.
+        </ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-grid *ngIf="this.bestellung">
+        <ion-card *ngFor="let bestellposten of this.bestellung.bestellposten">
+            <ion-row class="ion-float-left">
+                <!-- Artikel Image -->
+                <ion-col>
+                    <img src="https://via.placeholder.com/150x150" alt="{{ bestellposten.warenkorbartikel.name }}_img">
+                </ion-col>
+
+                <ion-col>
+                    <ion-card-title>{{ bestellposten.warenkorbartikel.name }}</ion-card-title>
+                    <ion-card-subtitle>Versandkosten: {{ bestellposten.warenkorbartikel.versand.kosten }} €</ion-card-subtitle>
+                    <ion-card-subtitle>Versand aus: {{ bestellposten.warenkorbartikel.versand.laenderCode }}</ion-card-subtitle>
+                    <ion-card-title>{{ bestellposten.warenkorbartikel.preis }} €</ion-card-title>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+    </ion-grid>
+</ion-content>

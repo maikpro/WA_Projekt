@@ -12,6 +12,10 @@ const routes: Routes = [
     path: 'artikel/id/:id',
     component: ArtikelComponent
   },
+  {
+    path: 'suchwort/:suchwort',
+    component: SearchPage
+  }
 ];
 
 @NgModule({
