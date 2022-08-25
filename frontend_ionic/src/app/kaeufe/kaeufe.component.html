@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title>
+            Deine Käufe
+        </ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <div *ngFor="let artikel of this.kaufliste">
+        <ion-card *ngIf="this.kaufliste.length > 0">
+            <ion-grid>
+                <ion-row class="ion-float-left">
+                    <!-- Artikel Image -->
+                    <ion-col>
+                        <img src="https://via.placeholder.com/150x150" alt="{{ artikel.name }}_img">
+                    </ion-col>
+                
+                    <!--Artikel Content-->
+                    <ion-col>
+                        <ion-card-content>
+                            <ion-card-title>{{ artikel.name }}</ion-card-title>
+                            <ion-card-subtitle>Artikelzustand: {{ artikel.warenkorbartikelzustand }}</ion-card-subtitle>
+                            <ion-card-subtitle>Versandkosten: {{ artikel.versand.kosten }} €</ion-card-subtitle>
+                            <ion-card-subtitle>Versand aus: {{ artikel.versand.laenderCode }}</ion-card-subtitle>
+                            <ion-card-title>{{ artikel.preis }} €</ion-card-title>
+                        </ion-card-content>
+                    </ion-col>
+              </ion-row>
+            </ion-grid>
+        </ion-card>
+    </div>
+
+    <div *ngIf="this.kaufliste.length === 0" class="container">
+        <h2>Käufe</h2>
+        <h3>Sie haben noch nichts gekauft.</h3>
+    </div>
+</ion-content>

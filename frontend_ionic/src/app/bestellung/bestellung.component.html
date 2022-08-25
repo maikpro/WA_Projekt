@@ -102,8 +102,9 @@
                         </ion-card-header>
                         
                         <ion-card-content>
-                            Keep close to Nature's heart... and break clear away, once in awhile,
-                            and climb a mountain or spend a week in the woods. Wash your spirit clean.
+                            <p>{{ this.account.vorname }} {{ this.account.nachname }}</p>
+                            <p>{{ this.account.adresse.strasse }} {{ this.account.adresse.hausnr }}</p>
+                            <p>{{ this.account.adresse.plz }} {{ this.account.adresse.ort }}</p>    
                         </ion-card-content>
                     </ion-card>
                 </ion-col>
@@ -118,8 +119,26 @@
                         </ion-card-header>
                         
                         <ion-card-content>
-                            Keep close to Nature's heart... and break clear away, once in awhile,
-                            and climb a mountain or spend a week in the woods. Wash your spirit clean.
+                            <form [formGroup]="this.bestellForm">
+                                <ion-list>
+                                    <ion-radio-group formControlName="bezahlmethode">
+                                        <ion-item>
+                                            <ion-label>PayPal</ion-label>
+                                            <ion-radio slot="start" value="PAYPAL"></ion-radio>
+                                        </ion-item>
+                                        
+                                        <ion-item>
+                                            <ion-label>Lastschrift</ion-label>
+                                            <ion-radio slot="start" value="LASTSCHRIFT"></ion-radio>
+                                        </ion-item>
+
+                                        <!--Validierung bezahlmethode -->
+                                        <ion-item class="bezahlmethode-error" *ngIf="submitted && f['bezahlmethode'].errors">
+                                            <div *ngIf="f['bezahlmethode'].errors['required']">Wählen Sie eine Bezahlmethode aus</div>
+                                        </ion-item>
+                                    </ion-radio-group>
+                                </ion-list>
+                            </form>
                         </ion-card-content>
                     </ion-card>
                 </ion-col>
@@ -134,8 +153,27 @@
                         </ion-card-header>
                         
                         <ion-card-content>
-                            Keep close to Nature's heart... and break clear away, once in awhile,
-                            and climb a mountain or spend a week in the woods. Wash your spirit clean.
+                            <!--LINE-->
+                            <ion-row class="ion-justify-content-between">
+                                <p>Artikel ({{this.warenkorb.warenkorbpostenlist.length}})</p>
+                                <p>{{ this.warenkorb.artikelSumme }} €</p>
+                            </ion-row>
+                            <!--LINE-->
+                            
+                            <!--LINE-->
+                            <ion-row class="ion-justify-content-between">
+                                <p>Versandkosten</p>
+                                <p>{{ this.warenkorb.versandSumme }} €</p>
+                            </ion-row>
+                            <!--LINE-->
+                            
+                            <!--LINE-->
+                            <ion-row class="ion-justify-content-between line">
+                                <p>Gesamt</p>
+                                <p>{{ this.warenkorb.gesamtSumme }} €</p>
+                            </ion-row>
+                            <ion-button (click)="this.bestellungAbschliessen()" expand="full" shape="round">Bestellung abschließen</ion-button>
+
                         </ion-card-content>
                     </ion-card>
                 </ion-col>

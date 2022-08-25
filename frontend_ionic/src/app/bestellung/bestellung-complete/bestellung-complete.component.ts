@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Bestellung } from 'src/app/shared/models/Bestellung';
 import { WarenkorbService } from 'src/app/shared/services/warenkorb.service';
 import { BestellungService } from '../bestellung.service';
@@ -13,7 +13,7 @@ export class BestellungCompleteComponent implements OnInit {
   public id!: number;
   public bestellung!: Bestellung;
 
-  constructor(private route: ActivatedRoute, private bestellService: BestellungService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private bestellService: BestellungService) { }
 
   public ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -24,5 +24,9 @@ export class BestellungCompleteComponent implements OnInit {
         this.bestellung=bestellung;
       });
     });
+  }
+
+  public gotoKaeufe(): void {
+    this.router.navigateByUrl('/tabs/account-overview/kaeufe');
   }
 }

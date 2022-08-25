@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { AnimationController, ModalController, ToastController } from '@ionic/angular';
 import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dialog.component';
 
@@ -6,8 +6,15 @@ import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dia
   providedIn: 'root'
 })
 export class NotificationService {
+  private modalController!: ModalController;
 
-  constructor(private toastController: ToastController, private modalController: ModalController) { }
+  private duration = 3500;
+
+  constructor(
+    private toastController: ToastController,
+    //private modalController: ModalController
+    private injector: Injector
+  ) { }
 
   public async showSuccessMessage(message: string) {
     const toast = await this.toastController.create({
@@ -15,7 +22,13 @@ export class NotificationService {
       message,
       icon: 'checkmark-circle',
       color: 'success',
-      duration: 3500,
+      duration: this.duration,
+      buttons: [
+        {
+          icon: 'close',
+          role: 'cancel'
+        }
+      ]
     });
     await toast.present();
   }
@@ -26,12 +39,19 @@ export class NotificationService {
       message,
       icon: 'alert-circle',
       color: 'danger',
-      duration: 3500,
+      duration: this.duration,
+      buttons: [
+        {
+          icon: 'close',
+          role: 'cancel'
+        }
+      ]
     });
     await toast.present();
   }
 
   public async confirm(title: string, message: string, cancelButtonText: string, confirmButtonText?: string): Promise<boolean> {
+    this.modalController = this.injector.get(ModalController);
     const modal = await this.modalController.create({
       component: ConfirmDialogComponent,
       componentProps: {

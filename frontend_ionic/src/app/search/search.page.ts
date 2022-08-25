@@ -57,7 +57,7 @@ export class SearchPage implements OnInit {
    */
    private search(): void {
     this.searchField.valueChanges.subscribe(searchInput => {
-      if(this.searchField.value.length > 0){
+      if(searchInput !== undefined && searchInput.length > 0){
         this.isSearching = true;
         this.suchwort = searchInput;
         this.searchService.getSearchResults(searchInput).subscribe(response => {

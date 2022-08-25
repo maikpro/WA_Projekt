@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Artikel } from 'src/app/shared/models/Artikel';
@@ -12,13 +13,13 @@ import { ArtikelService } from '../../shared/services/artikel.service';
 @Component({
   selector: 'app-artikelanlegen',
   templateUrl: './artikelanlegen.component.html',
-  styleUrls: ['./artikelanlegen.component.css']
+  styleUrls: ['./artikelanlegen.component.scss']
 })
 export class ArtikelanlegenComponent implements OnInit {
   public artikelForm!: FormGroup;
   public artikelZustaende!: Artikelzustand[];
   public submitted = false;
-  
+
   private numRegex = /^\d{0,6}(\.\d{0,2})?$/;
 
 
@@ -26,7 +27,7 @@ export class ArtikelanlegenComponent implements OnInit {
 
   public ngOnInit(): void {
     this.artikelZustaende = Object.values(Artikelzustand); // Alle möglichen Zustände
-    
+
     this.artikelForm = this.formBuilder.group({
       name: ['', Validators.required],
       beschreibung: ['', Validators.required],
@@ -42,13 +43,13 @@ export class ArtikelanlegenComponent implements OnInit {
   public createArtikel(): void {
     this.submitted = true;
 
-    console.log(this.f['preis']);
+    console.log(this.f.preis);
 
     const testVersand: Versand = {
       kosten: 4.99,
       lieferant: Lieferant.DHL,
       laenderCode: LaenderCode.DEU
-    }
+    };
 
     /*const testArtikel: Artikel = {
       name: "testArtikel",
@@ -56,7 +57,7 @@ export class ArtikelanlegenComponent implements OnInit {
       preis: 99.98,
       artikelzustand: Artikelzustand.GEBRAUCHT,
       versand: testVersand
-    } 
+    }
 
     console.log("CREATE: ", testArtikel);*/
 
@@ -66,13 +67,11 @@ export class ArtikelanlegenComponent implements OnInit {
 
       console.log(neuerArtikel);
       this.artikelService.createArtikel(neuerArtikel).subscribe(res => {
-        console.log(res)
+        console.log(res);
         this.notifyService.showSuccessMessage(`Du hast den Artikel '${neuerArtikel.name}' angelegt!`);
       });
       this.artikelForm.reset();
+      this.submitted = false;
     }
-
-    
   }
-
 }

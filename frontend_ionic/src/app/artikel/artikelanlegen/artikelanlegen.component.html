@@ -1,56 +1,64 @@
-<div class="container artikel-erstellen-container">
-    <h2>Artikel anlegen</h2>
+
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title>
+            Artikel anlegen
+        </ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
     <form class="artikelForm" [formGroup]="artikelForm">
         <!--Artikelname-->
-        <div class="form-group mt-3">
-            <label for="name">Artikelname</label>
-            <input formControlName="name" [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" type="text" class="form-control" placeholder="Artikelname...">
-        
-            <!--Validierung Artikelname -->
-            <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
-                <div *ngIf="f['name'].errors['required']">Artikelname ist erforderlich</div>
-            </div>
-        </div>
+        <ion-item>
+            <ion-label *ngIf="!f['name'].errors" position="floating">Artikelname</ion-label>
+            <ion-label *ngIf="submitted && f['name'].errors" position="floating">
+                <div *ngIf="f['name'].errors['required']">Artikelname ist erforderlich*</div>
+            </ion-label>
+            <ion-input formControlName="name" [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" type="text" placeholder="Artikelname..."></ion-input>
+        </ion-item>
 
         <!--Artikelzustand-->
-        <div class="form-group mt-3">
-            <label for="name">Zustand</label>
-            <select formControlName="artikelzustand"  class="form-select" [ngClass]="{ 'is-invalid': submitted && f['artikelzustand'].errors }" aria-label="Default select example">
-                <option *ngFor="let zustand of this.artikelZustaende" [value]="zustand">{{ zustand }}</option>
-            </select>
-
-            <!--Validierung Artikelzustand -->
-            <div *ngIf="submitted && f['artikelzustand'].errors" class="invalid-feedback">
-                <div *ngIf="f['artikelzustand'].errors['required']">Artikelzustand ist erforderlich</div>
-            </div>
-        </div>
+        <ion-item>
+            <ion-label *ngIf="!f['artikelzustand'].errors" position="floating">Artikelzustand</ion-label>
+            <ion-label *ngIf="submitted && f['artikelzustand'].errors" position="floating">
+                <div *ngIf="f['artikelzustand'].errors['required']">Artikelzustand ist erforderlich*</div>
+            </ion-label>
+            
+            <ion-select interface="popover" [ngClass]="{ 'is-invalid': submitted && f['artikelzustand'].errors }" formControlName="artikelzustand" placeholder="Wähle Artikelzustand...">
+                <ion-select-option *ngFor="let zustand of this.artikelZustaende" [value]="zustand">{{ zustand }}</ion-select-option>
+            </ion-select>
+        </ion-item>
 
         <!--Artikelbeschreibung-->
-        <div class="form-group mt-3">
-            <label for="name">Beschreibung</label>
-            <textarea formControlName="beschreibung" [ngClass]="{ 'is-invalid': submitted && f['beschreibung'].errors }" class="form-control" rows="3" placeholder="Eine Artikelbeschreibung..."></textarea>
-
-            <!--Validierung Artikelbeschreibung -->
-            <div *ngIf="submitted && f['beschreibung'].errors" class="invalid-feedback">
-                <div *ngIf="f['beschreibung'].errors['required']">Artikelbeschreibung ist erforderlich</div>
-            </div>
-        </div>
+        <ion-item>
+            <ion-label *ngIf="!f['beschreibung'].errors" position="floating">Artikelbeschreibung</ion-label>
+            <ion-label *ngIf="submitted && f['beschreibung'].errors" position="floating">
+                <div *ngIf="f['beschreibung'].errors['required']">Artikelbeschreibung ist erforderlich*</div>
+            </ion-label>
+            <ion-textarea 
+                formControlName="beschreibung" 
+                [ngClass]="{ 'is-invalid': submitted && f['beschreibung'].errors }" 
+                rows="4" 
+                placeholder="Eine Artikelbeschreibung..."
+                autoGrow="true"
+            >
+            </ion-textarea>
+        </ion-item>
 
         <!--Artikelpreis-->
-        <div class="form-group mt-3">
-            <label for="name">Preis</label>
-            <input formControlName="preis" [ngClass]="{ 'is-invalid': submitted && f['preis'].errors }" type="text" class="form-control" placeholder="Preis...">
-        
-            <!--Validierung Artikelpreis required-->
-            <div *ngIf="submitted && f['preis'].errors" class="invalid-feedback">
-                <div *ngIf="f['preis'].errors['required']">Artikelpreis ist erforderlich</div>
-            </div>
-
-            <!--Validierung Artikelpreis ist korrektes decimal?-->
-            <div *ngIf="submitted && f['preis'].errors" class="invalid-feedback">
+        <ion-item>
+            <ion-label *ngIf="!f['preis'].errors" position="floating">Artikelpreis</ion-label>
+            <ion-label *ngIf="submitted && f['preis'].errors" position="floating">
+                <div *ngIf="f['preis'].errors['required']">Artikelpreis ist erforderlich*</div>
                 <div *ngIf="f['preis'].errors['pattern']">Artikelpreis muss Format (99.99) haben und max. 6 Stellen vor dem Komma!</div>
-            </div>
-        </div>
+            </ion-label>
+
+            <ion-input formControlName="preis" [ngClass]="{ 'is-invalid': submitted && f['preis'].errors }" type="text" placeholder="0.00..."></ion-input>
+        </ion-item>
+        <ion-button (click)="createArtikel()">Artikel Anlegen!</ion-button>
     </form>
-    <button class="btn btn-primary mt-3" (click)="createArtikel()">Artikel Anlegen!</button>
-</div>
+</ion-content>

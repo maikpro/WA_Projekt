@@ -29,6 +29,7 @@
                     <ion-col>
                         <ion-card-header>
                             <ion-card-title>{{ artikel.name }}</ion-card-title>
+                            <ion-card-subtitle>Verkäufer: {{ artikel.username }}</ion-card-subtitle>
                             <ion-card-subtitle>Artikelzustand: {{ artikel.artikelzustand }}</ion-card-subtitle>
                             <ion-card-subtitle>Versandkosten: {{ artikel.versand.kosten }} €</ion-card-subtitle>
                             <ion-card-subtitle>Versand aus: {{ artikel.versand.laenderCode }}</ion-card-subtitle>
@@ -42,8 +43,8 @@
                         
                         <!-- Action Buttons -->
                         <div class="action-buttons">
-                            <ion-button color="primary" expand="block" shape="round" *ngIf="!this.isArtikelInWarenkorb" (click)="this.artikelInWarenkorb()">In den Warenkorb</ion-button>
-                            <ion-button color="medium" expand="block" shape="round" fill="outline" *ngIf="!this.isArtikelOnBeobachtungsliste && this.isLogged" (click)="this.artikelInBeobachtungsliste()">
+                            <ion-button color="primary" expand="block" shape="round" *ngIf="!this.isArtikelInWarenkorb && this.canBuy" (click)="this.artikelInWarenkorb()">In den Warenkorb</ion-button>
+                            <ion-button color="medium" expand="block" shape="round" fill="outline" *ngIf="!this.isArtikelOnBeobachtungsliste && this.isLogged && this.canBuy" (click)="this.artikelInBeobachtungsliste()">
                                 <ion-icon slot="start" name="heart-outline"></ion-icon> 
                                 Auf die Beobachtungsliste
                             </ion-button>

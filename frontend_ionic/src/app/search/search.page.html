@@ -47,4 +47,8 @@
       </ion-card>
     </a>
   </div>
+
+  <h3 *ngIf="this.results.length === 0 && this.artikelList.length === 0 && this.suchwort.length > 0">
+    '{{ this.suchwort }}' wurde nicht gefunden
+  </h3>
 </ion-content>

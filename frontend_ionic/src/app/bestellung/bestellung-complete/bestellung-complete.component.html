@@ -3,9 +3,6 @@
         <ion-title *ngIf="this.bestellung">
             Bestellung (ID: {{ this.bestellung.id }}) wurde abgeschlossen.
         </ion-title>
-        <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
-        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
@@ -26,5 +23,6 @@
                 </ion-col>
             </ion-row>
         </ion-card>
+        <ion-button (click)="gotoKaeufe()">Gehe zu deinen Käufen</ion-button>
     </ion-grid>
 </ion-content>

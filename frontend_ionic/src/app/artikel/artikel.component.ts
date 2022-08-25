@@ -12,6 +12,7 @@ import { AccountService } from '../shared/services/account.service';
 import { Account } from '../shared/models/Account';
 import { Warenkorb } from '../shared/models/Warenkorb';
 import { NotificationService } from '../shared/services/notification.service';
+import { KeycloakAccount } from '../shared/models/KeycloakAccount';
 
 
 
@@ -27,6 +28,7 @@ export class ArtikelComponent implements OnInit {
   public isLogged: boolean = false;
   public isArtikelOnBeobachtungsliste: boolean = false;
   public isArtikelInWarenkorb: boolean = false;
+  public canBuy: boolean = true;
 
   constructor(
     private route: ActivatedRoute, 
@@ -53,6 +55,16 @@ export class ArtikelComponent implements OnInit {
       this.artikelService.getArtikelById(this.id).subscribe(res => {
         console.log(res);
         this.artikel = res;
+
+        if(this.isLogged){
+          // Checkt, ob der Artikel vom User ist
+          this.accountService.getCurrentAccount().subscribe((keycloakAccount: KeycloakAccount) => {
+            if(this.artikel.username === keycloakAccount.username){
+              this.canBuy = false;
+            }
+          });
+        }
+
       },
       error => {
         console.log(error);

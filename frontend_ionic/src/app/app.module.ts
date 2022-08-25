@@ -12,11 +12,15 @@ import { AccountComponent } from './account-overview/account/account.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ArtikelComponent } from './artikel/artikel.component';
+import { ArtikelanlegenComponent } from './artikel/artikelanlegen/artikelanlegen.component';
+import { BeobachtungslisteComponent } from './beobachtungsliste/beobachtungsliste.component';
 import { BestellungCompleteComponent } from './bestellung/bestellung-complete/bestellung-complete.component';
 import { BestellungComponent } from './bestellung/bestellung.component';
 import { initializeKeycloak } from './init/keycloak-init.factory';
+import { KaeufeComponent } from './kaeufe/kaeufe.component';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 import { GlobalErrorHandler } from './shared/misc/global-error-handler';
+import { VerkaeufeComponent } from './verkaeufe/verkaeufe.component';
 import { WarenkorbComponent } from './warenkorb/warenkorb.component';
 
 @NgModule({
@@ -27,7 +31,11 @@ import { WarenkorbComponent } from './warenkorb/warenkorb.component';
     AccountComponent,
     ConfirmDialogComponent,
     BestellungComponent,
-    BestellungCompleteComponent
+    BestellungCompleteComponent,
+    BeobachtungslisteComponent,
+    ArtikelanlegenComponent,
+    KaeufeComponent,
+    VerkaeufeComponent
   ],
   imports: [
     BrowserModule,

@@ -1,11 +1,12 @@
 /* eslint-disable max-len */
 import { ErrorHandler, Injectable, NgZone } from '@angular/core';
+import { NotificationService } from '../services/notification.service';
 
 
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
     constructor(
-        //private notifyService: NotificationService,
+        private notifyService: NotificationService,
         private zone: NgZone,
     ){}
 
@@ -39,7 +40,7 @@ export class GlobalErrorHandler implements ErrorHandler {
 
     private showMessage(message: string): void {
         this.zone.run(() => {
-            //this.notifyService.showErrorMessage(message);
+            this.notifyService.showErrorMessage(message);
             console.log(message);
         });
     }

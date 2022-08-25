@@ -19,7 +19,42 @@
     <!--Navigation-->
     <ion-item *ngIf="this.isLogged">
       <a routerLink="/tabs/account-overview/account">
-        <ion-label>Account</ion-label>
+        <ion-label>
+          <ion-icon name="person"></ion-icon> 
+          Account
+        </ion-label>
+      </a>
+    </ion-item>
+    <ion-item *ngIf="this.isLogged">
+      <a routerLink="/tabs/account-overview/beobachtungsliste">
+        <ion-label>
+          <ion-icon name="eye"></ion-icon> 
+          Beobachtungsliste
+        </ion-label>
+      </a>
+    </ion-item>
+    <ion-item *ngIf="this.isLogged">
+      <a routerLink="/tabs/account-overview/kaeufe">
+        <ion-label>
+          <ion-icon name="bag-check"></ion-icon> 
+          Deine Käufe
+        </ion-label>
+      </a>
+    </ion-item>
+    <ion-item *ngIf="this.isLogged">
+      <a routerLink="/tabs/account-overview/verkaeufe">
+        <ion-label>
+          <ion-icon name="cash"></ion-icon> 
+          Deine Verkäufe
+        </ion-label>
+      </a>
+    </ion-item>
+    <ion-item *ngIf="this.isLogged">
+      <a routerLink="/tabs/account-overview/artikel/anlegen">
+        <ion-label>
+          <ion-icon name="add"></ion-icon> 
+          Artikel anlegen
+        </ion-label>
       </a>
     </ion-item>
   </ion-list>
