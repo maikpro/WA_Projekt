@@ -21,11 +21,7 @@ export class WarenkorbComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    //this.warenkorbService.setWarenkorbId();
-    //this.warenkorbService.updateWarenkorbArtikelAnzahl();
-
-    this.warenkorbService.getWarenkorb().subscribe(warenkorb => {
-      console.log(warenkorb);
+    this.warenkorbService.getWarenkorb().subscribe((warenkorb: Warenkorb) => {
       this.warenkorb = warenkorb;
     },error => {
       if(error.status === 404){

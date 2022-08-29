@@ -107,4 +107,11 @@ public class ArtikelRepository implements PanacheRepository<ArtikelDTODB>, Artik
         return artikelDTODBs.stream().map(artikelDTODB -> ArtikelDTODB.Converter.toArtikel(artikelDTODB)).toList();
     }
 
+    @Override
+    public Collection<Artikel> getYourArtikel(String username) {
+        Collection<ArtikelDTODB> artikelDTODBs = list("artikelstatus = 'ACTIVE' and username = ?1", username);
+        LOG.debug(artikelDTODBs);
+        return artikelDTODBs.stream().map(artikelDTODB -> ArtikelDTODB.Converter.toArtikel(artikelDTODB)).toList();
+    }
+
 }

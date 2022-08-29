@@ -10,25 +10,6 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
-  {
-    path: 'warenkorb',
-    component: WarenkorbComponent
-  },
-  {
-    path: 'bestellung',
-    children: [
-      {
-        path: '',
-        component: BestellungComponent,
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'complete/id/:id',
-        component: BestellungCompleteComponent,
-        canActivate: [AuthGuard]
-      }
-    ],
-  },
   { path: '**', redirectTo: 'home' }
 ];
 @NgModule({

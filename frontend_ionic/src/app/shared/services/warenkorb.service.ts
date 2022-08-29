@@ -38,16 +38,9 @@ export class WarenkorbService {
       this.http.post<Warenkorb>(this.apiUrl, null).subscribe(res => {
         const warenkorb: Warenkorb = res;
         console.log(warenkorb);
-
-        // NUR ZUM TESTEN!
-        // 60 Sekunden wird die WarenkorbId gespeichert
-        //const expireDate = new Date();
-        //expireDate.setSeconds(expireDate.getSeconds() + 60)
-
         // Warenkorb wird für 24 Stunden gespeichert!
         const expireDate = new Date();
         expireDate.setHours(expireDate.getHours() + 24);
-
         this.cookieService.set('warenkorbId', warenkorb.id.toString(), expireDate);
       });
     }

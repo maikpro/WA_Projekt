@@ -18,7 +18,7 @@
     
     <!--Navigation-->
     <ion-item *ngIf="this.isLogged">
-      <a routerLink="/tabs/account-overview/account">
+      <a routerLink="/account-overview/account">
         <ion-label>
           <ion-icon name="person"></ion-icon> 
           Account
@@ -26,7 +26,7 @@
       </a>
     </ion-item>
     <ion-item *ngIf="this.isLogged">
-      <a routerLink="/tabs/account-overview/beobachtungsliste">
+      <a routerLink="/account-overview/beobachtungsliste">
         <ion-label>
           <ion-icon name="eye"></ion-icon> 
           Beobachtungsliste
@@ -34,7 +34,7 @@
       </a>
     </ion-item>
     <ion-item *ngIf="this.isLogged">
-      <a routerLink="/tabs/account-overview/kaeufe">
+      <a routerLink="/account-overview/kaeufe">
         <ion-label>
           <ion-icon name="bag-check"></ion-icon> 
           Deine Käufe
@@ -42,7 +42,7 @@
       </a>
     </ion-item>
     <ion-item *ngIf="this.isLogged">
-      <a routerLink="/tabs/account-overview/verkaeufe">
+      <a routerLink="/account-overview/verkaeufe">
         <ion-label>
           <ion-icon name="cash"></ion-icon> 
           Deine Verkäufe
@@ -50,7 +50,15 @@
       </a>
     </ion-item>
     <ion-item *ngIf="this.isLogged">
-      <a routerLink="/tabs/account-overview/artikel/anlegen">
+      <a routerLink="/account-overview/deine-artikel">
+        <ion-label>
+          <ion-icon name="star"></ion-icon> 
+          Deine Artikel
+        </ion-label>
+      </a>
+    </ion-item>
+    <ion-item *ngIf="this.isLogged">
+      <a routerLink="/account-overview/artikel/anlegen">
         <ion-label>
           <ion-icon name="add"></ion-icon> 
           Artikel anlegen

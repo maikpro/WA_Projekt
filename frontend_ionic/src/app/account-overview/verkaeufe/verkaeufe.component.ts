@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Artikel } from '../shared/models/Artikel';
-import { ArtikelService } from '../shared/services/artikel.service';
+import { Artikel } from '../../shared/models/Artikel';
+import { ArtikelService } from '../../shared/services/artikel.service';
 
 @Component({
   selector: 'app-verkaeufe',

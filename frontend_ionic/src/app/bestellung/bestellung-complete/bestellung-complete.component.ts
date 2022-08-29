@@ -27,6 +27,6 @@ export class BestellungCompleteComponent implements OnInit {
   }
 
   public gotoKaeufe(): void {
-    this.router.navigateByUrl('/tabs/account-overview/kaeufe');
+    this.router.navigateByUrl('/account-overview/kaeufe');
   }
 }

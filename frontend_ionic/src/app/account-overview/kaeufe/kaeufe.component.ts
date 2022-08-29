@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BestellungService } from '../bestellung/bestellung.service';
-import { Warenkorbartikel, Warenkorbposten } from '../shared/models/Warenkorb';
+import { BestellungService } from '../../bestellung/bestellung.service';
+import { Warenkorbartikel, Warenkorbposten } from '../../shared/models/Warenkorb';
 
 @Component({
   selector: 'app-kaeufe',

@@ -29,7 +29,7 @@
                         <ion-grid>
                             <ion-row class="ion-float-left">
                                 <!-- Artikel Image -->
-                                <a href="/tabs/search/artikel/id/{{warenkorbposten.warenkorbartikel.artikelIdReference}}">
+                                <a href="/search/artikel/id/{{warenkorbposten.warenkorbartikel.artikelIdReference}}">
                                     <ion-col>
                                         <img src="https://via.placeholder.com/150x150" alt="{{ warenkorbposten.warenkorbartikel.name }}_img">
                                     </ion-col>
@@ -38,7 +38,7 @@
                                 <!--Artikel Content-->
                                 <ion-col>
                                     <ion-card-content>
-                                        <a href="/tabs/search/artikel/id/{{warenkorbposten.warenkorbartikel.artikelIdReference}}">
+                                        <a href="/search/artikel/id/{{warenkorbposten.warenkorbartikel.artikelIdReference}}">
                                             <ion-card-title>{{ warenkorbposten.warenkorbartikel.name }}</ion-card-title>
                                             <ion-card-subtitle>Artikelzustand: {{ warenkorbposten.warenkorbartikel.warenkorbartikelzustand }}</ion-card-subtitle>
                                             <ion-card-subtitle>Versandkosten: {{ warenkorbposten.warenkorbartikel.versand.kosten }} €</ion-card-subtitle>
@@ -86,7 +86,7 @@
             <ion-row>
                 <ion-col>
                     <div *ngFor="let warenkorbposten of this.warenkorb.warenkorbpostenlist">
-                        <a href="/tabs/search/artikel/id/{{warenkorbposten.warenkorbartikel.artikelIdReference}}">
+                        <a href="/search/artikel/id/{{warenkorbposten.warenkorbartikel.artikelIdReference}}">
                             <ion-card>
                                 <ion-grid>
                                     <ion-row class="ion-float-left">

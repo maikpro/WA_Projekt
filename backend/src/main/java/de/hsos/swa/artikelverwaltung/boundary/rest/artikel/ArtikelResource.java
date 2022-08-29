@@ -88,6 +88,16 @@ public class ArtikelResource {
     }
 
     @GET
+    @Path("/deine-artikel")
+    @Authenticated
+    public Response getYourArtikel() {
+        String username = this.securityIdentity.getPrincipal().getName();
+        Collection<Artikel> yourArtikel = this.artikelService.getYourArtikel(username);
+        Collection<ArtikelDTO> yourArtikelDTOs = yourArtikel.stream().map(a -> ArtikelDTO.Converter.toDTO(a)).toList();
+        return Response.ok(yourArtikelDTOs).build();
+    }
+
+    @GET
     @Retry(maxRetries = 2)
     @Timeout(500)
     @Counted(name = "performedGetLatestArtikel", description = "Wie oft wurde getLatestArtikel() ausgeführt.")
@@ -152,6 +162,28 @@ public class ArtikelResource {
 
         ArtikelDTO createdArtikel = ArtikelDTO.Converter.toDTO(nullableArtikel.get());
         return Response.ok(createdArtikel).build();
+    }
+
+    @PUT
+    @Path("/id/{artikelid}")
+    @Authenticated
+    @Transactional
+    public Response updateArtikel(@PathParam("artikelid") Long id, @Valid ArtikelDTO artikelDTO) {
+        Optional<Artikel> nullableArtikel = this.artikelService.getById(id);
+        if (nullableArtikel.isEmpty()) {
+            LOG.debugf("Artikel mit der Id %d nicht gefunden!", id);
+            return Response.status(404).build();
+        }
+
+        Optional<Artikel> updatedNullableArtikel = this.artikelService
+                .updateArtikel(ArtikelDTO.Converter.toArtikel(artikelDTO));
+        if (updatedNullableArtikel.isEmpty()) {
+            LOG.debugf("Artikel mit der Id %d konnte nicht aktualisiert werden!", id);
+            return Response.status(404).build();
+        }
+
+        ArtikelDTO updatedArtikelDTO = ArtikelDTO.Converter.toDTO(updatedNullableArtikel.get());
+        return Response.ok(updatedArtikelDTO).build();
     }
 
     @PUT

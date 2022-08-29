@@ -19,9 +19,7 @@ export class AccountComponent implements OnInit {
   public accountForm!: FormGroup;
   public submitted = false;
   public isCreated = false;
-
   private username!: string;
-
   private account!: Account;
 
   constructor(

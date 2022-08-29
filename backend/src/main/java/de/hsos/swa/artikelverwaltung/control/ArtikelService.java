@@ -22,6 +22,8 @@ public interface ArtikelService {
 
     public Collection<Artikel> getLatestArtikel();
 
+    public Collection<Artikel> getYourArtikel(String username);
+
     public Collection<Artikel> getVerkaufteArtikel(String username);
 
     public Optional<Artikel> updateArtikel(Artikel artikel);

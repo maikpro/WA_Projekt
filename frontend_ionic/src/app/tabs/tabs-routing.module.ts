@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../auth/auth-guard.guard';
+import { BestellungCompleteComponent } from '../bestellung/bestellung-complete/bestellung-complete.component';
+import { BestellungComponent } from '../bestellung/bestellung.component';
+import { WarenkorbComponent } from '../warenkorb/warenkorb.component';
 import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: TabsPage,
     children: [
       {
@@ -21,14 +25,33 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/home',
+        redirectTo: '/home',
         pathMatch: 'full'
-      }
+      },
+      {
+        path: 'warenkorb',
+        component: WarenkorbComponent
+      },
+      {
+        path: 'bestellung',
+        children: [
+          {
+            path: '',
+            component: BestellungComponent,
+            canActivate: [AuthGuard],
+          },
+          {
+            path: 'complete/id/:id',
+            component: BestellungCompleteComponent,
+            canActivate: [AuthGuard]
+          }
+        ],
+      },
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/home',
+    redirectTo: '/home',
     pathMatch: 'full'
   }
 ];

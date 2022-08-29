@@ -13,15 +13,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ArtikelComponent } from './artikel/artikel.component';
 import { ArtikelanlegenComponent } from './artikel/artikelanlegen/artikelanlegen.component';
-import { BeobachtungslisteComponent } from './beobachtungsliste/beobachtungsliste.component';
+import { BeobachtungslisteComponent } from './account-overview/beobachtungsliste/beobachtungsliste.component';
 import { BestellungCompleteComponent } from './bestellung/bestellung-complete/bestellung-complete.component';
 import { BestellungComponent } from './bestellung/bestellung.component';
 import { initializeKeycloak } from './init/keycloak-init.factory';
-import { KaeufeComponent } from './kaeufe/kaeufe.component';
+import { KaeufeComponent } from './account-overview/kaeufe/kaeufe.component';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 import { GlobalErrorHandler } from './shared/misc/global-error-handler';
-import { VerkaeufeComponent } from './verkaeufe/verkaeufe.component';
+import { VerkaeufeComponent } from './account-overview/verkaeufe/verkaeufe.component';
 import { WarenkorbComponent } from './warenkorb/warenkorb.component';
+import { DeineArtikelComponent } from './account-overview/deine-artikel/deine-artikel.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { WarenkorbComponent } from './warenkorb/warenkorb.component';
     BeobachtungslisteComponent,
     ArtikelanlegenComponent,
     KaeufeComponent,
-    VerkaeufeComponent
+    VerkaeufeComponent,
+    DeineArtikelComponent
   ],
   imports: [
     BrowserModule,

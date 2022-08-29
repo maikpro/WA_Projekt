@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Account } from '../shared/models/Account';
-import { Beobachtungsartikel } from '../shared/models/Beobachtungsartikel';
-import { AccountService } from '../shared/services/account.service';
-import { ArtikelService } from '../shared/services/artikel.service';
+import { Account } from '../../shared/models/Account';
+import { Beobachtungsartikel } from '../../shared/models/Beobachtungsartikel';
+import { AccountService } from '../../shared/services/account.service';
+import { ArtikelService } from '../../shared/services/artikel.service';
 
 @Component({
   selector: 'app-beobachtungsliste',

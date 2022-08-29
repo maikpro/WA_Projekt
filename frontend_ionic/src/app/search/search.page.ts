@@ -60,8 +60,8 @@ export class SearchPage implements OnInit {
       if(searchInput !== undefined && searchInput.length > 0){
         this.isSearching = true;
         this.suchwort = searchInput;
-        this.searchService.getSearchResults(searchInput).subscribe(response => {
-          this.results = response;
+        this.searchService.getSearchResults(searchInput).subscribe((results: Artikel[]) => {
+          this.results = results;
           console.log(this.results);
         });
       } else {
