@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
@@ -63,6 +64,13 @@ public class ArtikelResource {
 
     @Inject
     SecurityIdentity securityIdentity;
+
+    @GET
+    @Path("/test")
+    public Response testEndpoint() {
+        Optional<Artikel> stuhl = this.artikelService.getById(12L);
+        return Response.ok(stuhl).build();
+    }
 
     @GET
     @Retry(maxRetries = 2)
@@ -184,6 +192,27 @@ public class ArtikelResource {
 
         ArtikelDTO updatedArtikelDTO = ArtikelDTO.Converter.toDTO(updatedNullableArtikel.get());
         return Response.ok(updatedArtikelDTO).build();
+    }
+
+    @DELETE
+    @Path("/id/{artikelid}")
+    @Authenticated
+    @Transactional
+    public Response deleteArtikel(@PathParam("artikelid") Long id) {
+        Optional<Artikel> nullableArtikel = this.artikelService.getById(id);
+        if (nullableArtikel.isEmpty()) {
+            LOG.debugf("Artikel mit der Id %d nicht gefunden!", id);
+            return Response.status(404).build();
+        }
+
+        boolean isDeleted = this.artikelService.deleteArtikel(nullableArtikel.get());
+
+        if (!isDeleted) {
+            LOG.debugf("Artikel mit der id %d konnte nicht gelöscht werden!", nullableArtikel.get());
+            return Response.status(404).build();
+        }
+
+        return Response.ok().build();
     }
 
     @PUT

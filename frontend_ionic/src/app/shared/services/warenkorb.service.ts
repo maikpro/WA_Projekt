@@ -4,13 +4,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Warenkorb } from '../models/Warenkorb';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class WarenkorbService {
-  private readonly apiUrl = 'http://localhost:8080/api/warenkorb';
+  private readonly apiUrl = environment.apiKey + '/api/warenkorb';
 
   public warenkorbArtikelAnzahl = 0;
 

@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import { Artikel } from 'src/app/shared/models/Artikel';
 import { CookieService } from 'ngx-cookie-service';
 import { Warenkorb } from '../models/Warenkorb';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArtikelService {
-  private readonly apiUrl = 'http://localhost:8080/api/artikel';
+  private readonly apiUrl = environment.apiKey + '/api/artikel';
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
@@ -36,6 +37,10 @@ export class ArtikelService {
 
   public updateArtikel(artikel: Artikel): Observable<Artikel> {
     return this.http.put<Artikel>(this.apiUrl + '/id/' + artikel.id, artikel);
+  }
+
+  public deleteArtikel(id: number): any {
+    return this.http.delete<any>(this.apiUrl + '/id/' + id);
   }
 
   public addArtikelToWarenkorb(artikel: Artikel): Observable<Warenkorb> {

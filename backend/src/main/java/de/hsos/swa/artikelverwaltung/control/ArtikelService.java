@@ -27,4 +27,6 @@ public interface ArtikelService {
     public Collection<Artikel> getVerkaufteArtikel(String username);
 
     public Optional<Artikel> updateArtikel(Artikel artikel);
+
+    public boolean deleteArtikel(Artikel artikel);
 }

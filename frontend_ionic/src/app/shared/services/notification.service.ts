@@ -1,5 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
-import { AnimationController, ModalController, ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dialog.component';
 
 @Injectable({
@@ -33,13 +33,13 @@ export class NotificationService {
     await toast.present();
   }
 
-  public async showErrorMessage(message: string) {
+  public async showErrorMessage(message: string, duration?: number) {
     const toast = await this.toastController.create({
       header: 'Fehler',
       message,
       icon: 'alert-circle',
       color: 'danger',
-      duration: this.duration,
+      duration: duration || this.duration,
       buttons: [
         {
           icon: 'close',

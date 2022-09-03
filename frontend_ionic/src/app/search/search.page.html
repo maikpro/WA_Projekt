@@ -11,10 +11,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" scroll-y="false">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-list *ngIf="isSearching">
     <div *ngFor="let result of results">
-      <a href="/tabs/search/artikel/id/{{result.id}}">
+      <a href="/search/artikel/id/{{result.id}}">
         <ion-item>
           <ion-label>{{ result.name }}</ion-label>
         </ion-item>
@@ -23,7 +27,7 @@
   </ion-list>
 
   <div *ngFor="let artikel of this.artikelList">
-    <a routerLink="/tabs/search/artikel/id/{{artikel.id}}">
+    <a routerLink="/search/artikel/id/{{artikel.id}}">
       <ion-card>
         <ion-grid>
           <ion-row class="ion-float-left">
@@ -48,7 +52,7 @@
     </a>
   </div>
 
-  <h3 *ngIf="this.results.length === 0 && this.artikelList.length === 0 && this.suchwort.length > 0">
+  <h3 *ngIf="this.results === undefined && this.artikelList === undefined && this.suchwort.length > 0">
     '{{ this.suchwort }}' wurde nicht gefunden
   </h3>
 </ion-content>

@@ -15,6 +15,7 @@ export class GlobalErrorHandler implements ErrorHandler {
             this.handleHttpError(error);
         } else {
             console.error(error);
+            this.notifyService.showErrorMessage('Es konnte keine Verbindung zum Server aufgebaut werden: ' + error.error, 20000);
         }
     }
 

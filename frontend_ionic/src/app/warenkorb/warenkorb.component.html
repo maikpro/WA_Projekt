@@ -20,6 +20,10 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
     <ion-grid *ngIf="this.warenkorb && this.warenkorb.warenkorbpostenlist.length > 0">        
         <!--Desktop Version-->
         <ion-row class="ion-hide-lg-down">

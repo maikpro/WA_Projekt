@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
+import { environment } from 'src/environments/environment';
 import { KeycloakAccount } from '../shared/models/KeycloakAccount';
 import { AccountService } from '../shared/services/account.service';
 
@@ -25,11 +26,11 @@ export class AccountOverviewPage implements OnInit {
   }
 
   public login(): void {
-    this.router.navigateByUrl('/tabs/account-overview/account');
+    this.router.navigateByUrl(environment.frontend + '/account-overview/account');
   }
 
   public logout(): void {
-    this.keycloakService.logout('http://localhost:8100/tabs/account-overview');
+    this.keycloakService.logout(environment.frontend + '/account-overview');
   }
 
 }

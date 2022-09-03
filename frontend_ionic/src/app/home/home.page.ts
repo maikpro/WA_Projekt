@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Artikel } from '../shared/models/Artikel';
 import { ArtikelService } from '../shared/services/artikel.service';
+import { NotificationService } from '../shared/services/notification.service';
 import { SearchService } from '../shared/services/search.service';
 import { WarenkorbService } from '../shared/services/warenkorb.service';
 
@@ -22,7 +23,8 @@ export class HomePage implements OnInit {
   constructor(private router: Router,
     private searchService: SearchService,
     private artikelService: ArtikelService,
-    public warenkorbService: WarenkorbService
+    public warenkorbService: WarenkorbService,
+    private notifyService: NotificationService
   ) {}
 
   public ngOnInit(): void {
@@ -30,9 +32,14 @@ export class HomePage implements OnInit {
     this.latestArtikel();
   }
 
+  public doRefresh(event): void {
+    this.latestArtikel();
+    event.target.complete();
+  }
+
   public gotoSearchpage(): void {
     console.log('Gehe zur Suche anzeigen...');
-    this.router.navigateByUrl(`/tabs/search/suchwort/${this.suchwort}`);
+    this.router.navigateByUrl(`/search/suchwort/${this.suchwort}`);
   }
 
   /**
@@ -60,6 +67,8 @@ export class HomePage implements OnInit {
     this.artikelService.getLatestArtikel().subscribe((artikel: Artikel[]) => {
       console.log(artikel);
       this.artikelList = artikel;
+    }, error => {
+      this.notifyService.showErrorMessage('Beim Abrufen der Artikelliste ist ein Fehler aufgetreten');
     });
   }
 

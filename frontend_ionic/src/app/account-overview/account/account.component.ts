@@ -7,6 +7,7 @@ import { Account } from 'src/app/shared/models/Account';
 import { KeycloakAccount } from 'src/app/shared/models/KeycloakAccount';
 import { AccountService } from 'src/app/shared/services/account.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -142,7 +143,7 @@ export class AccountComponent implements OnInit {
       this.accountService.deleteAccount().subscribe(res => {
         console.log(res);
         this.notifyService.showSuccessMessage('Du hast den Account gelöscht!');
-        this.keycloakService.logout('http://localhost:8100/tabs/home');
+        this.keycloakService.logout(environment + '/home');
       });
     }
   }

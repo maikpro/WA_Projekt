@@ -1,13 +1,14 @@
 import {HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Artikel } from '../models/Artikel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
-  private readonly apiUrl = 'http://localhost:8080/api/artikel/suche?sw=';
+  private readonly apiUrl = environment.apiKey + '/api/artikel/suche?sw=';
 
   constructor(private http: HttpClient) { }
 

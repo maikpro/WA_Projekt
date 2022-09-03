@@ -13,6 +13,16 @@ export class KaeufeComponent implements OnInit {
   constructor(private bestellService: BestellungService) { }
 
   public ngOnInit(): void {
+    this.getKaeufe();
+  }
+
+  public doRefresh(event): void {
+    this.kaufliste = [];
+    this.getKaeufe();
+    event.target.complete();
+  }
+
+  private getKaeufe(): void {
     this.bestellService.getKaeufe().subscribe(bestellungen => {
       console.log(bestellungen);
       bestellungen.forEach((bestellung: { bestellposten: any[] }) => bestellung.bestellposten.forEach(bp => {
@@ -21,5 +31,4 @@ export class KaeufeComponent implements OnInit {
       }));
     });
   }
-
 }

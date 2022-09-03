@@ -13,6 +13,10 @@
 
 <ion-content [fullscreen]="true">
 
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-list *ngIf="isSearching">
     <div *ngFor="let result of results">
       <a routerLink="/search/artikel/id/{{result.id}}">

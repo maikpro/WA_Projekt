@@ -10,11 +10,14 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
     <div *ngFor="let beobachtungsartikel of this.beobachtungsliste">
         <ion-card>
             <ion-grid>
                 <ion-row class="ion-float-left">
-                    <a routerLink="/tabs/search/artikel/id/{{beobachtungsartikel.artikelIdReference}}">
+                    <a routerLink="/search/artikel/id/{{beobachtungsartikel.artikelIdReference}}">
                     <!-- Artikel Image -->
                         <ion-col>
                             <img src="https://via.placeholder.com/150x150" alt="{{ beobachtungsartikel.name }}_img">
@@ -24,7 +27,7 @@
                 <!--Artikel Content-->
                 <ion-col>
                   <ion-card-content>
-                    <a routerLink="/tabs/search/artikel/id/{{beobachtungsartikel.artikelIdReference}}">
+                    <a routerLink="/search/artikel/id/{{beobachtungsartikel.artikelIdReference}}">
                         <ion-card-title>{{ beobachtungsartikel.name }}</ion-card-title>
                         <ion-card-subtitle>Artikelzustand: {{ beobachtungsartikel.artikelzustand }}</ion-card-subtitle>
                         <ion-card-title>{{ beobachtungsartikel.preis }} €</ion-card-title>

@@ -13,10 +13,19 @@ export class VerkaeufeComponent implements OnInit {
   constructor(private artikelService: ArtikelService) { }
 
   public ngOnInit(): void {
+    this.getVerkaeufe();
+  }
+
+  public doRefresh(event): void {
+    this.verkaufteArtikel = [];
+    this.getVerkaeufe();
+    event.target.complete();
+  }
+
+  private getVerkaeufe(): void {
     this.artikelService.getVerkaufteArtikel().subscribe((verkaufteArtikel: Artikel[]) => {
       console.log(verkaufteArtikel);
       this.verkaufteArtikel=verkaufteArtikel;
     });
   }
-
 }

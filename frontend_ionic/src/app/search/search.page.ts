@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RefresherEventDetail } from '@ionic/angular';
 import { Artikel } from '../shared/models/Artikel';
 import { ArtikelService } from '../shared/services/artikel.service';
 import { SearchService } from '../shared/services/search.service';
@@ -41,9 +42,14 @@ export class SearchPage implements OnInit {
     });
   }
 
+  public doRefresh(event): void {
+    this.search();
+    event.target.complete();
+  }
+
   public gotoSearchpage(): void {
     console.log('Gehe zur Suche anzeigen...');
-    this.router.navigateByUrl(`/tabs/search/suchwort/${this.suchwort}`);
+    this.router.navigateByUrl(`/search/suchwort/${this.suchwort}`);
   }
 
   private showArtikellist(): void {

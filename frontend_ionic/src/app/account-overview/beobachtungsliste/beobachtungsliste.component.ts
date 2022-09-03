@@ -18,6 +18,11 @@ export class BeobachtungslisteComponent implements OnInit {
     this.setBeobachtungsliste();
   }
 
+  public doRefresh(event): void {
+    this.setBeobachtungsliste();
+    event.target.complete();
+  }
+
   public setBeobachtungsliste(): void {
     this.accountService.getCurrentAccountInfo().subscribe(res => {
       console.log(res);

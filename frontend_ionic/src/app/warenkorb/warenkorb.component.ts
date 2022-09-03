@@ -21,13 +21,12 @@ export class WarenkorbComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.warenkorbService.getWarenkorb().subscribe((warenkorb: Warenkorb) => {
-      this.warenkorb = warenkorb;
-    },error => {
-      if(error.status === 404){
-        this.cookieService.delete('warenkorbId');
-      }
-    });
+    this.getWarenkorb();
+  }
+
+  public doRefresh(event): void {
+    this.getWarenkorb();
+    event.target.complete();
   }
 
   public deleteArtikel(id: number): void {
@@ -42,5 +41,15 @@ export class WarenkorbComponent implements OnInit {
 
   public gotoBestellung(): void {
     this.router.navigateByUrl('/bestellung');
+  }
+
+  private getWarenkorb(): void {
+    this.warenkorbService.getWarenkorb().subscribe((warenkorb: Warenkorb) => {
+      this.warenkorb = warenkorb;
+    },error => {
+      if(error.status === 404){
+        this.cookieService.delete('warenkorbId');
+      }
+    });
   }
 }

@@ -114,4 +114,9 @@ public class ArtikelRepository implements PanacheRepository<ArtikelDTODB>, Artik
         return artikelDTODBs.stream().map(artikelDTODB -> ArtikelDTODB.Converter.toArtikel(artikelDTODB)).toList();
     }
 
+    @Override
+    public boolean deleteArtikel(Artikel artikel) {
+        return deleteById(artikel.getId());
+    }
+
 }
