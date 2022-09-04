@@ -2,12 +2,15 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+// Wlan Netzwerk: http://192.168.178.20
+
+const domain ='http://localhost';
 export const environment = {
   production: false,
-  apiKey: 'http://192.168.178.20:8080',
-  keycloakApi: 'http://192.168.178.20:9090',
-  frontend: 'http://192.168.178.20:8100',
-  domain: 'http://192.168.178.20'
+  apiKey: domain + ':8080',
+  keycloakApi: domain + ':9090',
+  frontend: domain + ':8100',
+  domain
 };
 
 /*

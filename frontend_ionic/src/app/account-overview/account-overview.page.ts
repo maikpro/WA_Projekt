@@ -26,11 +26,11 @@ export class AccountOverviewPage implements OnInit {
   }
 
   public login(): void {
-    this.router.navigateByUrl(environment.frontend + '/account-overview/account');
+    this.router.navigateByUrl('/account-overview/account');
   }
 
   public logout(): void {
-    this.keycloakService.logout(environment.frontend + '/account-overview');
+    this.keycloakService.logout('/account-overview');
   }
 
 }
