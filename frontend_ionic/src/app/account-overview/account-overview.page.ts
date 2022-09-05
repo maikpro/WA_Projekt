@@ -30,7 +30,6 @@ export class AccountOverviewPage implements OnInit {
   }
 
   public logout(): void {
-    this.keycloakService.logout('/account-overview');
+    this.keycloakService.logout(environment.frontend + '/account-overview');
   }
-
 }

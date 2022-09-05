@@ -721,13 +721,13 @@
     {
       "id": "6849db93-ffa4-4ae5-8c67-74e9ccbc2283",
       "clientId": "quarkus-app",
-      "rootUrl": "http://192.168.178.20:8100/",
+      "rootUrl": "http://localhost:8100/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "http://192.168.178.20:8100/*"
+        "http://localhost:8100/*"
       ],
       "webOrigins": [
         "+"

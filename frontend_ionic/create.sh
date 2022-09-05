@@ -28,13 +28,13 @@
 ionic build 
 
 # Android Plattform hinzufügen
-ionic cap add android
+#ionic cap add android
 
 # Syncing
-ionic cap sync android
+#ionic cap sync android
 
 # open App in Androidstudio
 #ionic cap open android
 #ionic cap run android -l --external --target=Pixel_3_API_30 --public-host=192.168.178.20 --configuration=production 
 
-ionic cap run android -l --external --target=Pixel_3_API_30 --host=192.168.178.20 --port=8100  --public-host=192.168.178.20 --open --configuration=production 
+ionic cap run android -l --external --target=Pixel_3_API_30 --host=192.168.178.20 --port=8100  --public-host=192.168.178.20 --open

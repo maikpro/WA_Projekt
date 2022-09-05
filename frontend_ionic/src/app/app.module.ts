@@ -16,7 +16,7 @@ import { ArtikelanlegenComponent } from './artikel/artikelanlegen/artikelanlegen
 import { BeobachtungslisteComponent } from './account-overview/beobachtungsliste/beobachtungsliste.component';
 import { BestellungCompleteComponent } from './bestellung/bestellung-complete/bestellung-complete.component';
 import { BestellungComponent } from './bestellung/bestellung.component';
-import { MyKCInit } from './init/keycloak-init.factory';
+import { initializeKeycloak} from './init/keycloak-init.factory';
 import { KaeufeComponent } from './account-overview/kaeufe/kaeufe.component';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 import { GlobalErrorHandler } from './shared/misc/global-error-handler';
@@ -55,7 +55,7 @@ import { DeineArtikelComponent } from './account-overview/deine-artikel/deine-ar
     CookieService,
     {
       provide: APP_INITIALIZER,
-      useFactory: MyKCInit.initializeKeycloak,
+      useFactory: initializeKeycloak,
       multi: true,
       deps: [KeycloakService],
     },
