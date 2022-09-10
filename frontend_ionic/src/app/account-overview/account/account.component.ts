@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { KeycloakService } from 'keycloak-angular';
+//import { KeycloakService } from 'keycloak-angular';
 import { Account } from 'src/app/shared/models/Account';
 import { KeycloakAccount } from 'src/app/shared/models/KeycloakAccount';
 import { AccountService } from 'src/app/shared/services/account.service';
@@ -26,7 +26,7 @@ export class AccountComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private formBuilder: FormBuilder,
-    private keycloakService: KeycloakService,
+    //private keycloakService: KeycloakService,
     private notifyService: NotificationService
     //private bestellService: BestellungService
   ) { }
@@ -143,7 +143,7 @@ export class AccountComponent implements OnInit {
       this.accountService.deleteAccount().subscribe(res => {
         console.log(res);
         this.notifyService.showSuccessMessage('Du hast den Account gelöscht!');
-        this.keycloakService.logout(environment + '/home');
+        //this.keycloakService.logout(environment + '/home');
       });
     }
   }

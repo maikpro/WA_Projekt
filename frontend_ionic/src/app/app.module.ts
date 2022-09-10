@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { CookieService } from 'ngx-cookie-service';
 import { AccountComponent } from './account-overview/account/account.component';
 
@@ -16,7 +15,6 @@ import { ArtikelanlegenComponent } from './artikel/artikelanlegen/artikelanlegen
 import { BeobachtungslisteComponent } from './account-overview/beobachtungsliste/beobachtungsliste.component';
 import { BestellungCompleteComponent } from './bestellung/bestellung-complete/bestellung-complete.component';
 import { BestellungComponent } from './bestellung/bestellung.component';
-import { initializeKeycloak} from './init/keycloak-init.factory';
 import { KaeufeComponent } from './account-overview/kaeufe/kaeufe.component';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
 import { GlobalErrorHandler } from './shared/misc/global-error-handler';
@@ -45,7 +43,6 @@ import { DeineArtikelComponent } from './account-overview/deine-artikel/deine-ar
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    KeycloakAngularModule
   ],
   providers: [
     {
@@ -53,12 +50,13 @@ import { DeineArtikelComponent } from './account-overview/deine-artikel/deine-ar
       useClass: IonicRouteStrategy
     },
     CookieService,
-    {
+    /*{
       provide: APP_INITIALIZER,
       useFactory: initializeKeycloak,
       multi: true,
       deps: [KeycloakService],
     },
+    */
     {
       provide: ErrorHandler,
       useClass: GlobalErrorHandler,

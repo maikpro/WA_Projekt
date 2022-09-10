@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Artikel } from '../shared/models/Artikel';
 import { ArtikelService } from '../shared/services/artikel.service';
 import { WarenkorbService } from '../shared/services/warenkorb.service';
-import { KeycloakService } from 'keycloak-angular';
+//import { KeycloakService } from 'keycloak-angular';
 import { AccountService } from '../shared/services/account.service';
 import { Account } from '../shared/models/Account';
 import { Warenkorb } from '../shared/models/Warenkorb';
@@ -34,19 +34,20 @@ export class ArtikelComponent implements OnInit {
     private route: ActivatedRoute, 
     private artikelService: ArtikelService, 
     public warenkorbService: WarenkorbService, 
-    private keycloakService: KeycloakService, 
+    //private keycloakService: KeycloakService, 
     private accountService: AccountService, 
     private notifyService: NotificationService
   ) {}
 
   public ngOnInit(): void {
-    this.keycloakService.isLoggedIn().then(res => {
+    /*this.keycloakService.isLoggedIn().then(res => {
       this.isLogged = res;
       if(this.isLogged){
         // Checkt, ob artikel bereits auf der beobachtungsliste
         this.checkIsArtikelOnBeobachtungsliste();
       }
     });
+    */
 
     this.route.params.subscribe(params => {
       this.id = +params.id;

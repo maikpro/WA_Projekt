@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 // Wlan Netzwerk: http://192.168.178.20
-const domain = 'http://localhost';
+const domain = 'http://192.168.178.20';
 export const environment = {
   production: false,
   apiKey: domain + ':8080',

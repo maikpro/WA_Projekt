@@ -1,6 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { App } from '@capacitor/app';
+import { Platform } from '@ionic/angular';
+import Keycloak from 'keycloak-capacitor';
+import { environment } from 'src/environments/environment';
 import { Artikel } from '../shared/models/Artikel';
 import { ArtikelService } from '../shared/services/artikel.service';
 import { NotificationService } from '../shared/services/notification.service';
@@ -20,16 +26,54 @@ export class HomePage implements OnInit {
   public artikelList: Artikel[] = [];
   private suchwort: string;
 
+  public keycloak: Keycloak.KeycloakInstance;
+
   constructor(private router: Router,
     private searchService: SearchService,
     private artikelService: ArtikelService,
     public warenkorbService: WarenkorbService,
-    private notifyService: NotificationService
+    private notifyService: NotificationService,
+    public platform: Platform
   ) {}
 
   public ngOnInit(): void {
     this.search();
     this.latestArtikel();
+
+    this.keycloak = new Keycloak({
+      clientId: 'quarkus-app',
+      realm: 'quarkus',
+      url: environment.keycloakApi,
+    });
+
+    if (this.platform.is('hybrid')) {
+      this.keycloak.init({
+        adapter: 'capacitor-native',
+        responseMode: 'query',
+        redirectUri: 'de.hsos.mybay://home'
+      });
+    } else { // for web
+        this.keycloak.init({
+          adapter: 'default',
+          redirectUri: environment.frontend
+        });
+    }
+
+    async () => {
+      const { url } = await App.getLaunchUrl();
+
+      console.log('App opened with URL: ' + url.toString());
+    };
+  }
+
+  public tester(): void {
+    App.addListener('appUrlOpen', data => {
+      console.log('App opened with URL:', data.url);
+    });
+  }
+
+  public login(): void {
+    this.keycloak.login();
   }
 
   public doRefresh(event): void {

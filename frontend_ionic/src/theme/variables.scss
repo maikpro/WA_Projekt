@@ -3,6 +3,31 @@
 
 /** Ionic CSS Variables **/
 :root {
+
+  /*
+      CUSTOM ADDED
+    */
+    --ion-background-color: #121212;
+    --ion-background-color-rgb: 18,18,18;
+
+    --ion-text-color: #ffffff;
+    --ion-text-color-rgb: 255,255,255;
+
+    --ion-border-color: #222222;
+
+    //
+
+    --ion-item-background: #1e1e1e;
+
+    --ion-toolbar-background: #1f1f1f;
+
+    --ion-tab-bar-background: #1f1f1f;
+
+    --ion-card-background: #1e1e1e;
+    /*
+      CUSTOM ADDED
+    */
+
   /** primary **/
   --ion-color-primary: #ffffff;
   --ion-color-primary-rgb: 255, 255, 255;
@@ -145,6 +170,30 @@
     --ion-color-light-contrast-rgb: 255,255,255;
     --ion-color-light-shade: #1e2023;
     --ion-color-light-tint: #383a3e;
+
+    /*
+      CUSTOM ADDED
+    */
+    --ion-background-color: #121212;
+    --ion-background-color-rgb: 18,18,18;
+
+    --ion-text-color: #ffffff;
+    --ion-text-color-rgb: 255,255,255;
+
+    --ion-border-color: #222222;
+
+    //
+
+    --ion-item-background: #1e1e1e;
+
+    --ion-toolbar-background: #1f1f1f;
+
+    --ion-tab-bar-background: #1f1f1f;
+
+    --ion-card-background: #1e1e1e;
+    /*
+      CUSTOM ADDED
+    */
   }
 
   /*
