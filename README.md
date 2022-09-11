@@ -64,4 +64,4 @@ npm start
 </details>
 
 ## Demo
-![demo](demo.gif)
+<img src="demo.gif" width="250px"/>
