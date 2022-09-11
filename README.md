@@ -45,6 +45,9 @@ npm start
 
 ## Screenshots
 
+<details>
+<summary>Show Screenshots</summary>
+<br>
 <img src="screenshots/home.png" width="250px"/>
 <img src="screenshots/home_suche.png" width="250px"/>
 <img src="screenshots/suche.png" width="250px"/>
@@ -58,3 +61,7 @@ npm start
 <img src="screenshots/artikel_anlegen.png" width="250px"/>
 <img src="screenshots/artikel_update_delete.png" width="250px"/>
 <img src="screenshots/confirm_deletion.png" width="250px"/>
+</details>
+
+## Demo
+![demo](demo.gif)
