@@ -8,12 +8,12 @@ In das Verzeichnis backend wechseln und den Befehl zum Starten eingeben:
 ./mvnw quarkus:dev
 ```
 
-- Quarkus Port: localhost:8080
-- Swagger UI: localhost:8080/api/q/swagger-ui
+- Quarkus Port: ``` http://localhost:8080 ```
+- Swagger UI: ``` http://localhost:8080/api/q/swagger-ui ```
 
-- Keycloak Port: localhost:9090
+- Keycloak Port: ``` http://localhost:9090 ```
 
-## Frontend (localhost: localhost:8100
+## Frontend
 
 In das Verzeichnis frontend_ionic wechseln und den Befehl zum Starten eingeben:
 
