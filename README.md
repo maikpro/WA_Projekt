@@ -46,3 +46,5 @@ npm start
 ## Screenshots
 
 ![Home](screenshots/home.png)
+
+<img src="screenshots/home.png" width="250px"/>
