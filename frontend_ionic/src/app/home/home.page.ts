@@ -50,7 +50,7 @@ export class HomePage implements OnInit {
       this.keycloak.init({
         adapter: 'capacitor-native',
         responseMode: 'query',
-        redirectUri: 'de.hsos.mybay://home'
+        redirectUri: window.location.origin
       });
     } else { // for web
         this.keycloak.init({
