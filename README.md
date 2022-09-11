@@ -45,6 +45,16 @@ npm start
 
 ## Screenshots
 
-![Home](screenshots/home.png)
-
 <img src="screenshots/home.png" width="250px"/>
+<img src="screenshots/home_suche.png" width="250px"/>
+<img src="screenshots/suche.png" width="250px"/>
+<img src="screenshots/artikel.png" width="250px"/>
+<img src="screenshots/artikel_warenkorb_add.png" width="250px"/>
+<img src="screenshots/warenkorb.png" width="250px"/>
+<img src="screenshots/login.png" width="250px"/>
+<img src="screenshots/bestellung.png" width="250px"/>
+<img src="screenshots/bestellung_abgeschlossen.png" width="250px"/>
+<img src="screenshots/dashboard.png" width="250px"/>
+<img src="screenshots/artikel_anlegen.png" width="250px"/>
+<img src="screenshots/artikel_update_delete.png" width="250px"/>
+<img src="screenshots/confirm_deletion.png" width="250px"/>
