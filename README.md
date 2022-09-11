@@ -43,3 +43,6 @@ npm start
 - passwort:
 `admin`
 
+## Screenshots
+
+![Home](screenshots/home.png)
