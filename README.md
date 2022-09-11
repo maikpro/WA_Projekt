@@ -1,21 +1,45 @@
 # WA_Projekt
 
-## Anforderungen
+## Backend
 
-- [ ] Nutzung eines Frameworks (ionic, Sencha Touch, phaser.io)
-- [ ] Laden externer Daten aus einer API
-- [ ] Nutzen von Telefondaten (Sensor, Telefonbuch, ...)
+In das Verzeichnis backend wechseln und den Befehl zum Starten eingeben:
 
+```
+./mvnw quarkus:dev
+```
 
-## Inhaltliche Anforderungen (Projektbericht):
-- [ ] Deckblatt mit Name und Matrikelnummer aller TeilnehmerInnen
-- [ ] Inhaltsverzeichnis
-- [ ] Verfassen einer Dokumentation inkl. Beschreibung der Funktionalitäten Ihrer App in einer angemessenen Gliederung (Zielgruppe, eingesetzte Technik, usw.) im Umfang von mindestens 6 Seiten pro Person
-- [ ] Genaue Erläuterung mindestens eines technischen Aspektes (z.B. Framework, spezielle Funktionen oder Algorithmen) in Funktion und Einsatz in ihrem Projekt
-- [ ] Genaue Erläuterung eines technischen Problems in ihrem Projekt mit Beschreibung der Lösung
-- [ ] Bilder/Grafiken zur Veranschaulichung
-- [ ] Fazit
-- [ ] Eigenständigkeitserklärung
+- Quarkus Port: localhost:8080
+- Swagger UI: localhost:8080/api/q/swagger-ui
 
-## Präsentation:
-- [ ] ca. 10-minütige Präsentation ihres Projektes vor einer Gruppe (Powerpoint, Vorstellung der App)
+- Keycloak Port: localhost:9090
+
+## Frontend (localhost: localhost:8100
+
+In das Verzeichnis frontend_ionic wechseln und den Befehl zum Starten eingeben:
+
+```
+ionic serve
+```
+
+oder
+
+```
+npm start
+```
+
+## Zugangsdaten zum Testen
+
+### Admin Account mit Admin-Rechten
+- username:
+`admin`
+
+- passwort:
+`admin`
+
+### Test Account mit User-Rechten
+- username:
+`testuser`
+
+- passwort:
+`admin`
+
